@@ -41,6 +41,7 @@ class ActividadController extends Controller
         //
         try{
             DB::beginTransaction();
+
             $Codigo_Producto_SIN=$request->get('Codigo_Producto_SIN');
             $Codigo_Actividad_CAEB=$request->get('Codigo_Actividad_CAEB');
             $Descripcion_o_producto_SIN=$request->get('Descripcion_o_producto_SIN');

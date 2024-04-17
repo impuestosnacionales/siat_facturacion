@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -90,14 +89,13 @@ header{
         <div class="col-auto px-0">
             <div id="sidebar" class="collapse collapse-horizontal show border-end">
                 <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                    <a href="{{ route('home') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-house-door-fill"></i><span>   Menú Principal</span> </a>
+                    <a href="home" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-house-door-fill"></i><span>   Menú Principal</span> </a>
                     <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-pencil-square"></i><span>   Solicitud</span> </a>
                     <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Administración de Clientes</span> </a>
-                    <a href="{{ route('contribuyente') }}" class="list-group-item border-end-0 d-inline-block text-truncate " ><i class="sideic bi bi-check2-square"></i><span>  Contribuyentes</span> </a>
-
+                    <a href="" class="list-group-item border-end-0 d-inline-block text-truncate " ><i class="sideic bi bi-check2-square"></i><span>  Contribuyentes</span> </a>
                     <a href="#" data-bs-target="#collapseExample" data-bs-toggle="collapse" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-boxes"></i><span>   Administración de Productos</span> <i class="sideic bi bi-chevron-right"></i></a>
                         <div id="collapseExample" class="collapse">
-                        <a href="{{ route('producto') }}" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión de Productos</span> </a>
+                        <a href="" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión de Productos</span> </a>
                         <a href="#" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión Masiva de Productos</span> </a>
                         </div>
                     <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-calculator-fill"></i><span>   Emisión</span> </a>
@@ -110,33 +108,46 @@ header{
             <main class="col ps-md-2 pt-2">
             <div class="row">
                 <div class="col-12">
-                <div class="container">
-        <div class="row">
-            <div class="col col-md-12 col-sm-12 justify-content-center">
-                <h1>Formulario Producto</h1>
-                <a href="{{route('producto')}}" class="btn btn-primary" role="button">Lista de Productos</a>
-                <form action="{{route('producto.update', $producto->id)}}" method="POST">
-                    @csrf
-                    {{method_field('PUT')}}
-                    <input type="hidden" name="_token" value="{{csrf_token()}}"> 
-                    <br>
-  <div class="mb-3">
-    <label class="form-label">Descripcion Producto Contribuyente</label>
-    <input type="text" class="form-control"  name="Codigo_Producto_SIN" value="{{$producto->Codigo_Producto_SIN }}"> 
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Codigo Actividad CAEB</label>
-    <input type="number" class="form-control" id="exampleInputPassword1"  name="Codigo_Actividad_CAEB" value="{{$producto->Codigo_Actividad_CAEB}}">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Descripcion_o_producto_SIN</label>
-    <input type="text" class="form-control" name="Descripcion_o_producto_SIN" value="{{$producto->Descripcion_o_producto_SIN}}">
-  </div>
-  <button type="submit" class="btn btn-primary">Editar</button>
-</form>
-            </div>
+                <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-12 col-sm-12 col-xs-12">
+          <font align="center"><h1>Unidades de medida</h1></font>
+          <a href="{{ route('unidad.create') }}" class="btn btn-primary" role="button">Añadir</a>
         </div>
+        <div class="col-12 col-md-12 justify-content-center">
+        <table class="table">
+  <thead >
+    <tr>
+      <br>
+      <th>Nombre</th>
+      <th>Operaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($unidades as $unidades)
+    <tr>
+      <td>{{$unidades->Nombre }}</td>
+      <td>
+      <a class="btn btn-success" href="{{route('unidad.show',$unidades->id)}}" role="button">Ver</a>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+        </div>
+      </div>
     </div>
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
                 </div>
             </div>
         </main>

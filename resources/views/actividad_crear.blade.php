@@ -85,23 +85,22 @@
     });
     var cont=0;
     var indice=1;
-    function agregar(){
-        var codigo=$("#p_codigo").val();
-        var actividad=$("#p_actividad").val();
-        var descripcion=$("#p_descripcion").val();
-        if(codigo!=0 && codigo>0 && actividad!=0 && actividad>0 && descripcion!=""){
-            var fila='<tr class="selected" id="fila" ><td><button type="button" class="btn btn-danger" onclick="eliminar('+cont+')">X</button></td><td> <input type="hidden"  name="indice" value="'+cont+'" /></td><td><input type="number" name="Codigo_Producto_SIN[]" value="'+codigo+'"></td><td><input type="number" name="Codigo_Actividad_CAEB[]" value="'+actividad+'"></td><td><input type="text" name="Descripcion_o_producto_SIN[]" value="'+descripcion+'"></td></tr>'
-            indice++;
-            cont++;
-            $('#tabla_body').append(fila);
-        }else{
-            alert("Porfavor rellenar los campos faltantes")
-        }
-        
+    function agregar() {
+    var codigo = $("#p_codigo").val();
+    var actividad = $("#p_actividad").val();
+    var descripcion = $("#p_descripcion").val();
+    if (codigo != 0 && codigo > 0 && actividad != 0 && actividad > 0 && descripcion != "") {
+        var fila = '<tr class="selected" id="fila_' + cont + '"><td><button type="button" class="btn btn-danger" onclick="eliminar(' + cont + ')">X</button></td><td> <input type="hidden"  name="indice" value="' + cont + '" /></td><td><input type="number" name="Codigo_Producto_SIN[]" value="' + codigo + '"></td><td><input type="number" name="Codigo_Actividad_CAEB[]" value="' + actividad + '"></td><td><input type="text" name="Descripcion_o_producto_SIN[]" value="' + descripcion + '"></td></tr>';
+        indice++;
+        cont++;
+        $('#tabla_body').append(fila);
+    } else {
+        alert("Por favor rellene los campos faltantes");
     }
-    function eliminar(){
-        $("#fila").remove();
-    }
+}
+function eliminar(indice) {
+    $("#fila_" + indice).remove();
+}
 </script>
 </body>
 </html>

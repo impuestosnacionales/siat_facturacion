@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contribuyentes', function (Blueprint $table) {
+        Schema::create('unidades', function (Blueprint $table) {
             $table->id();
-            $table->string('Descripcion_Producto_Contribuyente', 250);
-            $table->integer('Precio');
-            $table->string('Unidad_de_Medida', 75);
+            $table->string('Nombre',75);
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contribuyentes');
+        Schema::dropIfExists('unidades');
     }
 };
