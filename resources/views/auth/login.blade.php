@@ -17,37 +17,30 @@
 <body>
 <div class="container">
         <div class="body d-md-flex align-items-center justify-content-between">
-            <div class="box-1 mt-md-0 mt-5">
-                <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    class="" alt="">
-            </div>
+            
             <div class=" box-2 d-flex flex-column h-100">
                 <div class="mt-5">
                     <form action="{{route('login')}}" method="post">
                     @csrf
-
-                    <p class="mb-1 h-1">Iniciar Sesión</p>
                     
-                    <div class="d-flex flex-column ">
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="form2Example18">Correo</label>
-                            <input type="email" id="form2Example18" name="email" class="form-control" placeholder="Ingresa tu correo"/>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="form2Example28">Contraseña</label>
-                            <input type="password" id="form2Example28" name="password" class="form-control" />
+                    <div class="card text-center">
+                        <img class="card-img-top" src="assets/img/SIAT.jpg" alt="SIAT" />
+                        <div class="card-body">
+                            <p class="card-text">Ingrese sus datos para iniciar sesión</p> 
                             
+                            <div class="form-floating col-12 col-md-12 col-sm-12 col-xs-12">
+                                <br><input type="email" name="email" class="form-control" id="floatingNit" placeholder="Correo">
+                                <label for="floatingNit">Correo</label>
+                            </div><br>
+                            <div class="form-floating col-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+                                <label for="floatingPassword">Contraseña</label>
+                            </div><br>
                         </div>
+                    </div>
                     <!--<p class="small mb-2 pb-lg-2"><a class="text-muted footer" href="#!">Olvidaste tu contraseña?</a></p>-->
-                        <div class="pt-1 mb-2 ">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Ingresar</button>
-                        </div>
-
-                        
-                        <!--<div class="mt-3">
-                            <p class="mb-0 text-muted">Aún no tienes una cuenta? <a class="text-muted" href="{{route('register')}}">Registrate</a></p>
-                        </div>-->
+                    <div class="col-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="col-12 col-md-12 col-sm-12 col-xs-12 btn btn-primary btn-lg btn-block" type="submit">Ingresar</button>
                     </div>
                     </form>
                 </div>

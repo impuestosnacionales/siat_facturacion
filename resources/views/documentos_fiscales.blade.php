@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Documentos Fiscales</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <script src="https://kit.fontawesome.com/2713879efc.js" crossorigin="anonymous"></script>
+    
+    <style>
+header{
+    background-color: #0461ae;
+}
+#sidebar, .list-group-item{
+    background-color: #d3d6df;
+
+}
+.bi{
+    color:#ffffff;
+
+}
+.list-group-item:hover{
+    background-color:#c5cbe0;
+    color:#02297e;
+    text-decoration:underline
+}
+
+.sideic{
+    color:#02297e;
+
+}
+.modal-content {
+        overflow: hidden;
+    }
+.coso {
+        width: 100%;
+        margin-bottom: 0;
+        overflow-x: auto;
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <header class="py-3 ">
+        <div class="container-fluid  d-flex">
+            <div class="flex-shrink-1 col-md-3">
+                <a href="#" class="d-block align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none">
+                    <img src="https://fiva.impuestos.gob.bo/gpri/javax.faces.resource/images/LOGO-SIAT.png.xhtml?ln=common" alt="user" >
+                </a>
+            </div>
+            <div class="flex-shrink-1 col-md-1">
+                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class=" rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i></a>
+            </div>
+            <div class="flex-shrink-1 offset-md-7 col-md-1 d-none d-sm-block d-xs-none">
+                <a href="#"  class=" rounded-3 p-1 text-decoration-none"><i class="bi bi-bell"></i></a>
+            </div>
+            <div class="flex-shrink-1 col-md-1 d-none d-sm-block d-xs-none">
+                <a href="#"  class=" rounded-3 p-1 text-decoration-none"><i class="bi bi-megaphone"></i></a>
+            </div>
+            <div class="flex-grow-1 d-flex align-items-right col-md-2 d-none d-sm-block d-xs-none">
+                <div class="flex-shrink-0 dropdown">
+                    <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://via.placeholder.com/28?text=!" alt="user" width="32" height="32" class="rounded-circle"> Usuario
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Cerrar Sesión') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  <div class="container-fluid">
+
+    
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+            <div id="sidebar" class="collapse collapse-horizontal show border-end">
+              <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                <a href="{{ route('home') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-house-door-fill"></i><span>   Menú Principal</span> </a>
+                <a href="{{ route('dependencia') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Dependencia</span> </a>
+                
+                <a href="{{ route('tipodoc') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Tipo de documentos Personales</span> </a>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-pencil-square"></i><span>   Solicitud</span> </a>
+                <a href="{{ route('cliente') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Administración de Clientes</span> </a>
+                 <a href="#" data-bs-target="#collapseExample" data-bs-toggle="collapse" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-boxes"></i><span>   Administración de Productos</span> <i class="sideic bi bi-chevron-right"></i></a>
+                    <div id="collapseExample" class="collapse">
+                    <a href="{{ route('producto') }}" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión de Productos</span> </a>
+                    <a href="#" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión Masiva de Productos</span> </a>
+                    </div>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-calculator-fill"></i><span>   Emisión</span> </a>
+                <a href="{{ route('impresion.create') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-gear-fill"></i><span>   Configuración</span> </a>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-envelope-x-fill"></i><span>   Anulación</span> </a>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-bar-chart-line-fill"></i><span>   Consultas Emisión</span> </a>
+                <a href="{{route('actividad')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-cash-coin"></i><span> Registrar Actividad Economica </span> </a>
+                <a href="{{route('unidad')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-rulers"></i><span> Registrar Unidad de Medida</span> </a>
+                <a href="{{route('sucursal')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-shop"></i><span> Registrar Sucursal</span> </a>
+                <a href="{{route('documentosf')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-file-earmark-lock"></i><span> Registrar Documento Fiscal</span> </a>
+                <a href="{{route('documentos')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-window-dock"></i><span> Registrar Sectores de Documentos</span> </a>
+              </div>
+                </div>
+            </div>
+            <main class="col ps-md-2 pt-2">
+
+            <div class="row">
+                <div class="col-12">
+                <div class="container-fluid">
+                    
+      <div class="row">
+        <div class="col-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="border">
+            <figure>
+            <blockquote class="blockquote">
+                <font align="center"><p>Listado de Documentos Fiscales</p></font>
+            </blockquote>
+            </figure>
+        </div>
+        <br>
+          <a data-bs-toggle="modal" data-bs-target="#ModalAñadir" href class="btn btn-success" role="button">Añadir <i class="fa-regular fa-square-plus"></i></a>
+          <div class="modal fade" id="ModalAñadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Documento Fiscal</h1></font>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="message" class="alert alert-success" style="display: none;">Se añadió correctamente</div>
+      <form action="{{route('documentosf.store')}}" method="POST" onsubmit="showLoader(); setTimeout(hideLoader, 7000); showMessage();">
+      @csrf
+      <input type="hidden" name="_token" value="{{csrf_token()}}"> 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Nombre">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Descripcion">
+  </div>
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Estado</label>
+    <select class="form-select" name="Estado">
+        <option  >Activo</option>
+        <option >Inactivo</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Añadir</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ModalVer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Ver</h1></font>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="message" class="alert alert-success" style="display: none;">Se añadió correctamente</div>
+      <form method="POST">
+      @csrf
+        {{method_field('PUT')}}
+  <div class="card">
+    <div class="card-body">
+        <div class="row">
+        <div>
+        <div class="col-12 col-md-12 justify-content-center">
+        <table class="table table-striped table-bordered table-hover">
+  <thead class="bg-primary text-white">
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($documentosf as $documentito)
+    <tr>
+      <td value="">{{$documentito->Nombre}}</td>
+      <td value="">{{$documentito->Descripcion}}</td>
+      <td value="">{{$documentito->Estado}}</td>
+    <tr>
+    @endforeach
+</tbody>
+</table>
+        </div>
+        </div>
+    </div>
+  </div>
+  </div>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+        <div class="col-12 col-md-12 justify-content-center">
+        <table class="table table-striped table-bordered table-hover">
+  <thead class="bg-primary text-white">
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th style="visibility:collapse; display:none;">Estado</th>
+      <th>Operaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($documentosf as $documentito)
+    <tr>
+      <td>{{$documentito->Nombre}}</td>
+      <td>{{$documentito->Descripcion}}</td>
+      <td style="visibility:collapse; display:none;">{{$documentito->Estado}}</td>
+      <td>
+      <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square" ></i></a>
+      <a role="" data-bs-toggle="modal" data-bs-target="#ModalVer"><i class="fa-solid fa-eye"></i></a>
+      </td>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1></font>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="{{route('documentosf.update', $documentito->id)}}" method="POST">
+      @csrf
+        {{method_field('PUT')}}
+        <div class="mb-3">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Nombre" value="{{$documentito->Nombre}}"style="visibility:collapse; display:none;">
+        </div>
+        <div class="mb-3">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Descripcion" value="{{$documentito->Descripcion}}"style="visibility:collapse; display:none;">
+        </div>
+  <div class="mb-3">
+    <select name="Estado" class="form-select">
+        <option >Activo</option>
+        <option >Inactivo</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+<!-- Agrega este HTML para la pantalla de carga -->
+<div id="loader" class="overlay">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- Agrega este CSS para estilizar la pantalla de carga -->
+<style>
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); 
+    z-index: 999;
+    display: none; 
+  }
+
+  .spinner-border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+<script>
+  
+  function showLoader() {
+    document.getElementById('loader').style.display = 'block';
+    setTimeout(showMessage, 2000);
+  }
+
+ 
+  function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
+  }
+
+  
+  function showMessage() {
+    document.getElementById('message').style.display = 'block';
+  }
+</script>
+        </div>
+      </div>
+    </div>
+                </div>
+            </div>
+        </main>
+        </div>
+    </div>
+</div>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+  
+</body>
+
+</html>

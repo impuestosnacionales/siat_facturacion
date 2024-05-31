@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/2713879efc.js" crossorigin="anonymous"></script>
     
     <style>
 header{
@@ -88,21 +89,28 @@ header{
     <div class="row flex-nowrap">
         <div class="col-auto px-0">
             <div id="sidebar" class="collapse collapse-horizontal show border-end">
-                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                    <a href="home" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-house-door-fill"></i><span>   Menú Principal</span> </a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-pencil-square"></i><span>   Solicitud</span> </a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Administración de Clientes</span> </a>
-                    <a href="" class="list-group-item border-end-0 d-inline-block text-truncate " ><i class="sideic bi bi-check2-square"></i><span>  Contribuyentes</span> </a>
-                    <a href="#" data-bs-target="#collapseExample" data-bs-toggle="collapse" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-boxes"></i><span>   Administración de Productos</span> <i class="sideic bi bi-chevron-right"></i></a>
-                        <div id="collapseExample" class="collapse">
-                        <a href="" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión de Productos</span> </a>
-                        <a href="#" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión Masiva de Productos</span> </a>
-                        </div>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-calculator-fill"></i><span>   Emisión</span> </a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-gear-fill"></i><span>   Configuración</span> </a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-envelope-x-fill"></i><span>   Anulación</span> </a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-bar-chart-line-fill"></i><span>   Consultas Emisión</span> </a>
-                </div>
+              <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                <a href="{{ route('home') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-house-door-fill"></i><span>   Menú Principal</span> </a>
+                <a href="{{ route('dependencia') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Dependencia</span> </a>
+                
+                <a href="{{ route('tipodoc') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Tipo de documentos Personales</span> </a>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-pencil-square"></i><span>   Solicitud</span> </a>
+                <a href="{{ route('cliente') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-people-fill"></i><span>   Administración de Clientes</span> </a>
+                 <a href="#" data-bs-target="#collapseExample" data-bs-toggle="collapse" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-boxes"></i><span>   Administración de Productos</span> <i class="sideic bi bi-chevron-right"></i></a>
+                    <div id="collapseExample" class="collapse">
+                    <a href="{{ route('producto') }}" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión de Productos</span> </a>
+                    <a href="#" class="  list-group-item " ><i class="sideic bi bi-chevron-right"></i><i class="sideic bi bi-check2-square"></i><span>  Gestión Masiva de Productos</span> </a>
+                    </div>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-calculator-fill"></i><span>   Emisión</span> </a>
+                <a href="{{ route('impresion.create') }}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-gear-fill"></i><span>   Configuración</span> </a>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-envelope-x-fill"></i><span>   Anulación</span> </a>
+                <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-bar-chart-line-fill"></i><span>   Consultas Emisión</span> </a>
+                <a href="{{route('actividad')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-cash-coin"></i><span> Registrar Actividad Economica </span> </a>
+                <a href="{{route('unidad')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-rulers"></i><span> Registrar Unidad de Medida</span> </a>
+                <a href="{{route('sucursal')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-shop"></i><span> Registrar Sucursal</span> </a>
+                <a href="{{route('documentosf')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-file-earmark-lock"></i><span> Registrar Documento Fiscal</span> </a>
+                <a href="{{route('documentos')}}" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="sideic bi bi-window-dock"></i><span> Registrar Sectores de Documentos</span> </a>
+              </div>
                 </div>
             </div>
             <main class="col ps-md-2 pt-2">
@@ -111,14 +119,41 @@ header{
                 <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-12 col-sm-12 col-xs-12">
-          <font align="center"><h1>Unidades de medida</h1></font>
-          <a href="{{ route('unidad.create') }}" class="btn btn-primary" role="button">Añadir</a>
+            <div class="border">
+            <figure>
+            <blockquote class="blockquote">
+                <font align="center"><p>Listado de Unidad(es) de Medida(s)</p></font>
+            </blockquote>
+            </figure>
+            </div>
+          <a data-bs-toggle="modal" data-bs-target="#ModalAñadir" href class="btn btn-success" role="button">Añadir <i class="fa-regular fa-square-plus"></i></a>
+          <div class="modal fade" id="ModalAñadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Unidad de medida</h1></font>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div id="message" class="alert alert-success" style="display: none;">Se añadió correctamente</div>
+      <form action="{{route('unidad.store' )}}" method="POST" onsubmit="showLoader(); setTimeout(hideLoader, 7000); showMessage();">
+      @csrf
+      <input type="hidden" name="_token" value="{{csrf_token()}}"> 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Nombre">
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
         <div class="col-12 col-md-12 justify-content-center">
-        <table class="table">
-  <thead >
+        <table class="table table-striped table-bordered table-hover">
+  <thead class="bg-primary text-white">
     <tr>
-      <br>
       <th>Nombre</th>
       <th>Operaciones</th>
     </tr>
@@ -128,12 +163,82 @@ header{
     <tr>
       <td>{{$unidades->Nombre }}</td>
       <td>
-      <a class="btn btn-success" href="{{route('unidad.show',$unidades->id)}}" role="button">Ver</a>
+      <form action="{{route('unidad.destroy', $unidades->id)}}" method="POST">
+        @csrf
+        {{method_field('DELETE')}}
+    <button class="btn btn-danger" type="submit" value="Eliminar" onclick="return EliminarUnidad('Eliminar Unidad')"><i class="fa-solid fa-delete-left"></i></button>
+      <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" role="button"><i class="fa-solid fa-pen-to-square" ></i></a>
       </td>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1></font>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="{{route('unidad.update', $unidades->id)}}" method="POST" >
+      @csrf
+        {{method_field('PUT')}}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Nombre" value="{{$unidades->Nombre}}">
+  </div>
+  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
     </tr>
     @endforeach
   </tbody>
 </table>
+<!-- Agrega este HTML para la pantalla de carga -->
+<div id="loader" class="overlay">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<style>
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Color de fondo semitransparente */
+    z-index: 999; /* Asegúrate de que la pantalla de carga esté en la parte superior */
+    display: none; /* Por defecto, la pantalla de carga estará oculta */
+  }
+
+  .spinner-border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+
+<script>
+  // Función para mostrar la pantalla de carga
+  function showLoader() {
+    document.getElementById('loader').style.display = 'block';
+    // Llama a la función showMessage después de 2 segundos
+    setTimeout(showMessage, 2000);
+  }
+
+  // Función para ocultar la pantalla de carga
+  function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
+  }
+
+  // Función para mostrar el mensaje
+  function showMessage() {
+    // Muestra el mensaje
+    document.getElementById('message').style.display = 'block';
+  }
+</script>
         </div>
       </div>
     </div>

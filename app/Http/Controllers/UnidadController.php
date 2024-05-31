@@ -70,10 +70,10 @@ class UnidadController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $unidad=Producto::FindOrFail($id);
+        $unidad=Unidad::FindOrFail($id);
         $unidad->Nombre=$request->Nombre;
         $unidad->save();
-        return redirect()->action([UnidadController::class,'index']);
+        return back()->with("correcto", "Producto modificado correctamente");
     }
 
     /**

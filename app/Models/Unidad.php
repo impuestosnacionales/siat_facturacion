@@ -11,5 +11,8 @@ class Unidad extends Model
     protected $table="unidades";
     protected $primaryKey="id";
     protected $fillable=['Nombre'];
-    protected $hidde=['id'];
+    protected $hidden=['id'];
+    public function producto(){
+        return $this->belongsTo(Producto::class);
+    }
 }

@@ -27,10 +27,10 @@ class ActividadController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function pdfs()
     {
         //
-        return view('actividad_crear');
+        return view('pdfs.actividad_pdf');
     }
 
     /**
@@ -76,12 +76,7 @@ class ActividadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-        $actividad=Actividad::findOrFail($id);
-        return view('actividad_editar',['actividad'=>$actividad]);
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -89,12 +84,26 @@ class ActividadController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $actividad=Producto::FindOrFail($id);
-        $actvidad->Codigo_Producto_SIN=$request->Codigo_Producto_SIN;
-        $actvidad->Codigo_Actividad_CAEB=$request->Codigo_Actividad_CAEB;
-        $actvidad->Descripcion_o_producto_SIN=$request->Descripcion_o_producto_SIN;
+        /**try{
+            $sql = DB::update(" update actividad set Codigo_Producto_SIN=?, Codigo_Actividad_CAEB=?, Descripcion_o_producto_SIN=?", [
+                $request->txtCodigo_Producto_SIN,
+                $request->txtCodigo_Actividad_CAEB,
+                $request->txtDescripcion_o_producto_SIN,
+            ]);
+        }catch(\Throwable $th){
+            $sql=0;
+        }
+        if($sql==true){
+            return back()->with("correcto", "Producto modificado correctamente");
+        }else{
+            return back()->with("incorrecto", "Error al modificar");
+        }**/
+        $actividad=Actividad::FindOrFail($id);
+        $actividad->Codigo_Producto_SIN=$request->Codigo_Producto_SIN;
+        $actividad->Codigo_Actividad_CAEB=$request->Codigo_Actividad_CAEB;
+        $actividad->Descripcion_o_producto_SIN=$request->Descripcion_o_producto_SIN;
         $actividad->save();
-        return redirect()->action([ActividadController::class,'index']);
+        return back()->with("correcto", "Producto modificado correctamente");
     }
 
     /**
