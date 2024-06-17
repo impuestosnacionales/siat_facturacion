@@ -26,11 +26,6 @@ class UnidadController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-        return view('unidad_crear');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -57,12 +52,6 @@ class UnidadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-        $unidad=Unidad::findOrFail($id);
-        return view('unidad_editar',['unidad'=>$unidad]);
-    }
 
     /**
      * Update the specified resource in storage.
