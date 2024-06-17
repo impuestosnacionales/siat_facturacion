@@ -46,12 +46,17 @@
         <tr>
           <td>{{$unidades->Nombre }}</td>
           <td>
-            <form action="{{route('unidad.destroy', $unidades->id)}}" method="POST">
-              @csrf
-              {{method_field('DELETE')}}
-            <button class="btn btn-danger" type="submit" value="Eliminar" onclick="return EliminarUnidad('Eliminar Unidad')"><i class="fa-solid fa-delete-left"></i></button></form>
-            <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" role="button"><i class="fa-solid fa-pen-to-square" ></i></a>
-          </td>
+          <form action="{{route('unidad.destroy', $unidades->id)}}" method="POST" style="display:inline;">
+            @csrf
+            {{method_field('DELETE')}}
+            <button class="btn btn-danger" type="submit" value="Eliminar" onclick="return EliminarUnidad('Eliminar Unidad')">
+              <i class="fa-solid fa-delete-left"></i>
+            </button>
+          </form>
+          <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" role="button">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+        </td>
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
