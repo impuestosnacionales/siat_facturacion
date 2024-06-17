@@ -1,14 +1,13 @@
 @extends('base')
 @section('content')
-  <div class="col-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="border">
-        <figure>
-        <blockquote class="blockquote">
-            <font align="center"><p>Listado de Sucursal(es)</p></font>
-        </blockquote>
-        </figure>
+<div class="card col-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card-header">
+            <h2 class="card-title">Listado de Sucursal(es)</h2>
     </div>
+    <div class="card-body">
     <a data-bs-toggle="modal" data-bs-target="#ModalAñadir" href class="btn btn-success" role="button">Añadir <i class="fa-regular fa-square-plus"></i></a>
+    <hr>
+    <!-- MODAL DE AÑADIR -->
     <div class="modal fade" id="ModalAñadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
@@ -35,7 +34,7 @@
           </div>
       </div>
     </div>
-  </div>
+<!-- TABLA -->
   <div class="col-12 col-md-12 justify-content-center">
     <table class="table table-striped table-bordered table-hover">
       <thead class="bg-primary text-white">
@@ -57,6 +56,7 @@
                   <button class="btn btn-danger" type="submit" value="Eliminar" onclick="return EliminarSucursal('Eliminar Sucursal')"><i class="fa-solid fa-delete-left"></i></button></form>
                   <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success" href="" role="button"><i class="fa-solid fa-pen-to-square" ></i></a></div>
               </td>
+            <!-- MODAL DE EDITAR -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
@@ -93,4 +93,6 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 @endsection
