@@ -19,17 +19,9 @@ class DocumentosFController extends Controller
         {
             //
             $documentosf=DocumentosF::all();
-            return view('documentos_fiscales', ['documentosf'=>$documentosf]);
+            return view('Doc_Fiscal.documentos_fiscales', ['documentosf'=>$documentosf]);
         }
     
-        /**
-         * Show the form for creating a new resource.
-         */
-    
-    
-        /**
-         * Store a newly created resource in storage.
-         */
         public function store(Request $request)
         {
             //
@@ -41,14 +33,6 @@ class DocumentosFController extends Controller
             return redirect()->action([DocumentosFController::class,'index']);
         }
     
-        /**
-         * Display the specified resource.
-         */
-    
-    
-        /**
-         * Update the specified resource in storage.
-         */
         public function update(Request $request, string $id)
         {
             //
@@ -60,9 +44,6 @@ class DocumentosFController extends Controller
             return back()->with("correcto", "Producto modificado correctamente");
         }
     
-        /**
-         * Remove the specified resource from storage.
-         */
         public function destroy(string $id)
         {
             //
