@@ -116,7 +116,7 @@
                     <div class="row">
                       <div class="card col-12 col-md-12 col-sm-12 col-xs-12">
                           <div class="card-header">
-                            <h2 class="card-title">@yield('name')</h2>
+                            <h2 class="card-title">@yield('name') </h2>
                           </div>
                           <div class="card-body">
                             @yield('content')

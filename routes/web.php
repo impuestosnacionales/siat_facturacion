@@ -76,8 +76,9 @@ Route::get('/impresion/crear', [ImpresionController::class, 'create'])->name('im
 Route::post('/impresion', [ImpresionController::class, 'store'])->name('impresion.store');
 
 Route::get('/dependencia', [DependenciaController::class, 'index'])->name('dependencia');
-Route::get('/dependencia/crear', [DependenciaController::class, 'create'])->name('dependencia.create');
 Route::post('/dependencia', [DependenciaController::class, 'store'])->name('dependencia.store');
+Route::delete('/dependencia/{id}', [DependenciaController::class, 'destroy'])->name('dependencia.destroy');
+Route::put('/dependencia/{id}', [DependenciaController::class, 'update'])->name('dependencia.update');
 
 Route::get('/producto', [ProductoController::class, 'index'])->name('producto');
 Route::get('/producto/crear', [ProductoController::class, 'create'])->name('producto.create');
