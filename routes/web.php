@@ -68,8 +68,9 @@ Route::get('/cliente/{id}/editar', [ClienteController::class, 'edit'])->name('cl
 Route::put('/cliente/{id}', [ClienteController::class, 'update'])->name('cliente.update');
 
 Route::get('/tipodoc', [TipoDocumentoController::class, 'index'])->name('tipodoc');
-Route::get('/tipodoc/crear', [TipoDocumentoController::class, 'create'])->name('tipodoc.create');
 Route::post('/tipodoc', [TipoDocumentoController::class, 'store'])->name('tipodoc.store');
+Route::delete('/tipodoc/{id}', [TipoDocumentoController::class, 'destroy'])->name('tipodoc.destroy');
+Route::put('/tipodoc/{id}', [TipoDocumentoController::class, 'update'])->name('tipodoc.update');
 
 Route::get('/impresion', [ImpresionController::class, 'index'])->name('impresion');
 Route::get('/impresion/crear', [ImpresionController::class, 'create'])->name('impresion.create');

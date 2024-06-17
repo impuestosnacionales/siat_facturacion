@@ -21,17 +21,28 @@ class TipoDocumentoController extends Controller
         return view('Tipo_documento.tipo_documento',['tipo_documento'=>$tipo_documento]);
     }
 
-    public function create()
-    {
-        //
-        return view('Tipo_documento.tipodoc_crear');
-    }
-
     public function store(Request $request)
     {
         //
         $tipo_documento= new Tipo_documento($request->all());
         $tipo_documento->save();
         return redirect()->action([TipoDocumentoController::class, 'index']);
+    }
+    public function update(Request $request, string $id)
+    {
+        //
+        $tipo_documento=Tipo_documento::FindOrFail($id);
+        $tipo_documento->Nombre=$request->Nombre;
+        $tipo_documento->Codigo_doc=$request->Codigo_doc;
+        $tipo_documento->save();
+        return back()->with("correcto", "Tipo de documento modificado correctamente");
+    }
+
+    public function destroy(string $id)
+    {
+        //
+        $tipo_documento=Tipo_documento::findOrFail($id);
+        $tipo_documento->delete();
+        return redirect()->action([TipoDocumentoController::class,'index']);
     }
 }
