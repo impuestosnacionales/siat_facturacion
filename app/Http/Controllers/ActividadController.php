@@ -21,7 +21,7 @@ class ActividadController extends Controller
     {
         //
         $actividades=Actividad::all();
-        return view('actividad', ['actividades'=>$actividades]);
+        return view('ActividadEc.actividad', ['actividades'=>$actividades]);
     }
 
     /**
