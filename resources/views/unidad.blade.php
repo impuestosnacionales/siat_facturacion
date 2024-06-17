@@ -1,16 +1,11 @@
 @extends('base')
+@section('name')
+Listado de Unidad(es) de Medida(s)
+@endsection
 @section('content')
-<div class="row">
-  <div class="col-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="border">
-        <figure>
-        <blockquote class="blockquote">
-            <font align="center"><p>Listado de Unidad(es) de Medida(s)</p></font>
-        </blockquote>
-        </figure>
-      </div>
       <a data-bs-toggle="modal" data-bs-target="#ModalAñadir" href class="btn btn-success" role="button">Añadir <i class="fa-regular fa-square-plus"></i></a>
-    <div class="modal fade" id="ModalAñadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <hr>
+      <div class="modal fade" id="ModalAñadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -32,7 +27,6 @@
         </div>
       </div>
     </div>
-  </div>
   <div class="col-12 col-md-12 justify-content-center">
     <table class="table table-striped table-bordered table-hover">
       <thead class="bg-primary text-white">
@@ -126,8 +120,6 @@
     document.getElementById('message').style.display = 'block';
     }
     </script>
-  </div>
-</div>
 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

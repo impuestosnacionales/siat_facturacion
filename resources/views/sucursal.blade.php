@@ -1,10 +1,8 @@
 @extends('base')
+@section('name')
+Listado de Sucursal(es)
+@endsection
 @section('content')
-<div class="card col-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card-header">
-            <h2 class="card-title">Listado de Sucursal(es)</h2>
-    </div>
-    <div class="card-body">
     <a data-bs-toggle="modal" data-bs-target="#ModalAñadir" href class="btn btn-success" role="button">Añadir <i class="fa-regular fa-square-plus"></i></a>
     <hr>
     <!-- MODAL DE AÑADIR -->
@@ -93,6 +91,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 @endsection
