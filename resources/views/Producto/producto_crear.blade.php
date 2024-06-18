@@ -130,7 +130,7 @@ header{
                                         <form action="{{ route('producto.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            
+
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h4 class="card-title">Listado de Productos y Servicios Asignados por su(s) Actividad(es) Economica(s)</h4>
@@ -142,19 +142,19 @@ header{
                                                             <th>Descripción Producto SIN</th>
                                                             <th> </th>
                                                         </tr>
-                                                        @foreach ($actividad as $actividad)
+                                                        @foreach ($actividad as $act)
                                                         <tr>
-                                                            <td id="pid_actividad">{{ $actividad->id}}</td>
-                                                            <td id="psin2_{{ $actividad->id}}">{{ $actividad->Codigo_Producto_SIN}}</td>
-                                                            <td id="pcaeb2">{{ $actividad->Codigo_Actividad_CAEB}}</td>
-                                                            <td id="pdescp2">{{ $actividad->Descripcion_o_producto_SIN}}</td>
-                                                            <td><button type="button" class="btn btn-success" id="bt_seleccionar">Seleccionar</button></td>
+                                                            <td id="pid_actividad_{{ $act->id }}">{{ $act->id }}</td>
+                                                            <td id="psin2_{{ $act->id }}">{{ $act->Codigo_Producto_SIN }}</td>
+                                                            <td id="pcaeb2_{{ $act->id }}">{{ $act->Codigo_Actividad_CAEB }}</td>
+                                                            <td id="pdescp2_{{ $act->id }}">{{ $act->Descripcion_o_producto_SIN }}</td>
+                                                            <td><button type="button" class="btn btn-success bt_seleccionar" data-id="{{ $act->id }}">Seleccionar</button></td>
                                                         </tr>
                                                         @endforeach
                                                     </table>
                                                 </div>
                                             </div>
-                                            
+
                                             <br>
 
                                             <div class="row">
@@ -196,14 +196,15 @@ header{
                                             </div>
                                             <div class="row">
                                                 <div class="form-outline">
-                                                    <label class="form-label  col-lg-5 col-md-5"><strong>Unidad de Medida:</strong></label>
+                                                    <label class="form-label col-lg-5 col-md-5"><strong>Unidad de Medida:</strong></label>
                                                     <select name="unidad_id" id="unidad_id" class="col-lg-5 col-md-5">
                                                         @foreach ($unidad as $unidad)
-                                                        <option value="{{$unidad->id}}"> {{$unidad->Nombre}}  </option>
+                                                        <option value="{{ $unidad->id }}">{{ $unidad->Nombre }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="actividad_id" name="actividad_id">
                                             <br>
                                             <input class="btn btn-danger" type="submit" value="Añadir">
                                         </form>
@@ -216,48 +217,27 @@ header{
             </div>
         </main>
     </div>
-    
 </div>
+
 <script>
     $(document).ready(function(){
-        $('#bt_seleccionar').click(function(){
-            seleccionar();
+        $('.bt_seleccionar').click(function(){
+            var id = $(this).data('id');
+            var codigoProductoSIN = $('#psin2_' + id).text();
+            var codigoActividadCAEB = $('#pcaeb2_' + id).text();
+            var descripcionProductoSIN = $('#pdescp2_' + id).text();
+
+            $('#psin').text(codigoProductoSIN);
+            $('#pcaeb').text(codigoActividadCAEB);
+            $('#pdescp').text(descripcionProductoSIN);
+            $('#actividad_id').val(id);
         });
     });
-    function seleccionar(){
-    // Obtener el elemento <td> mediante su ID
-        var tdElement = document.getElementById("pid_actividad");
-        var tdElement1 = document.getElementById("psin2_{{ $actividad->id}}");
-        alert(tdElement1.innerHTML);
-        /*var labelElement1 = document.getElementById("psin");
-        var tdElement2 = document.getElementById("pcaeb2");
-        var labelElement2 = document.getElementById("pcaeb");
-        var tdElement3 = document.getElementById("pdescp2");
-        var labelElement3 = document.getElementById("pdescp");
-        // Verificar si el elemento existe
-        if (tdElement) {
-            // Acceder al contenido del elemento y almacenarlo en una variable
-            alert(tdElement);
-            var contenido1 = tdElement1.textContent || tdElement1.innerText;
-            var contenido2 = tdElement2.textContent || tdElement2.innerText;
-            var contenido3 = tdElement3.textContent || tdElement3.innerText;
-            // Hacer lo que necesites con el contenido capturado
-            labelElement1.textContent = contenido1;
-            labelElement2.textContent = contenido2;
-            labelElement3.textContent = contenido3;
-        } else {
-            console.error("No se encontró el elemento con ID 'pid_actividad'.");
-        }*/
-
-    }
 </script>
-<img src="https://fiva.impuestos.gob.bo/gpri/javax.faces.resource/images/LOGO-SIAT.png.xhtml?ln=common" alt="user" width="32" height="32" class="rounded-circle">
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGz5S5pQvF9JRvh4l5j2IGbF5Ik9kKyZ6I1pZ8RJfK4tw" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnK0CZp3FYZy4zF6U9c7XGc8KIWkn4t" crossorigin="anonymous"></script>
+
 </body>
 </html>
+
