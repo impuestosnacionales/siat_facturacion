@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,8 +134,8 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Listado de Productos y Servicios Asignados por su(s) Actividad(es) Economica(s)</h4>
-                            <table id="tabact" class="table">
+                            <h4 class="table actividad-economica">Listado de Productos y Servicios Asignados por su(s) Actividad(es) Economica(s)</h4>
+                            <table id="tabact" class="table" class="table actividad-economica">
                                 <thead>
                                     <tr>
                                         <th>N°</th>
@@ -257,14 +256,6 @@
             </main>
         </div>
     </div>
-=======
-@extends('base')
-@section('name1')
-    Facturación Porta Web en Línea - Gestión de Productos/Servicios
-@endsection
-@section('name')
-    Listado de Productos/Servicios habilitados a su NIT
-@endsection
 @section('content')
     <a href="{{ route('producto.create') }}" class="btn btn-success" role="button">Añadir <i class="bi bi-plus-square"></i></a>
     <hr>
@@ -294,7 +285,6 @@
     </table>
 @endsection
 <img src="https://fiva.impuestos.gob.bo/gpri/javax.faces.resource/images/LOGO-SIAT.png.xhtml?ln=common" alt="user" width="32" height="32" class="rounded-circle">
->>>>>>> f8508488237b9f6aa56d9d8da006ec0bbd0577d7
 
     <footer>
         <!-- Coloca el pie de página aquí -->
@@ -307,43 +297,30 @@
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-    $(document).ready(function(){
-        $('.bt_seleccionar').click(function(){
-            var id = $(this).data('id');
-            var codigoProductoSIN = $('#psin2_' + id).text();
-            var codigoActividadCAEB = $('#pcaeb2_' + id).text();
-            var descripcionProductoSIN = $('#pdescp2_' + id).text();
+$(document).ready(function(){
+    $('.bt_seleccionar').click(function(){
+        var id = $(this).data('id');
+        var codigoProductoSIN = $('#psin2_' + id).text();
+        var codigoActividadCAEB = $('#pcaeb2_' + id).text();
+        var descripcionProductoSIN = $('#pdescp2_' + id).text();
 
-            $('#psin').text(codigoProductoSIN);
-            $('#pcaeb').text(codigoActividadCAEB);
-            $('#pdescp').text(descripcionProductoSIN);
-            $('#actividad_id').val(id);
+        // Asignar valores a los elementos del formulario
+        $('#psin').text(codigoProductoSIN);
+        $('#pcaeb').text(codigoActividadCAEB);
+        $('#pdescp').text(descripcionProductoSIN);
+        $('#actividad_id').val(id);
 
-            // Ocultar la sección de actividad económica
-            $('.actividad-economica').hide();
+        // Ocultar la sección de actividad económica
+        $('.actividad-economica').hide();
 
-            // Mostrar el formulario oculto
-            $('.oculto').show();
+        // Mostrar el formulario oculto
+        $('.oculto').show();
 
-            // Enfoque al primer campo del formulario oculto
-            $('.oculto input:first').focus();
-        });
+        // Enfocar el primer campo del formulario oculto
+        $('.oculto input:first').focus();
     });
-</script>
-    <script>
-        $(document).ready(function() {
-            $('.bt_seleccionar').click(function() {
-                var id = $(this).data('id');
-                var codigoProductoSIN = $('#psin2_' + id).text();
-                var codigoActividadCAEB = $('#pcaeb2_' + id).text();
-                var descripcionProductoSIN = $('#pdescp2_' + id).text();
+});
 
-                $('#psin').text(codigoProductoSIN);
-                $('#pcaeb').text(codigoActividadCAEB);
-                $('#pdescp').text(descripcionProductoSIN);
-                $('#actividad_id').val(id);
-            });
-        });
     </script>
 </body>
 
