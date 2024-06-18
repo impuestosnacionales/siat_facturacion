@@ -252,6 +252,7 @@ header{
     </div>
   </div>
 </div>
+  <!---->
     </tr>
     @endforeach
   </tbody>
