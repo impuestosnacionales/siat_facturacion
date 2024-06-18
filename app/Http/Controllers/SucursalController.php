@@ -19,7 +19,7 @@ class SucursalController extends Controller
     {
         //
         $sucursales=Sucursal::all();
-        return view('sucursal', ['sucursales'=>$sucursales]);
+        return view ('Sucursal.sucursal', ['sucursales'=>$sucursales]);
     }
 
     /**
