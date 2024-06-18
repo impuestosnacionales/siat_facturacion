@@ -13,6 +13,6 @@ class DocumentoSector extends Model
     protected $fillable=['Descripcion','Caracteristicas','Tipo_documento'];
     protected $hidde=['id'];
     public function documentosf(){
-        return $this->belongsTo(DocumentosF::class);
+        return $this->belongsTo(DocumentosF::class, 'Tipo_documento', 'id');
     }
 }

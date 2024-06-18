@@ -13,8 +13,9 @@ class DocumentoSectorController extends Controller
     public function index()
     {
         //
-        $documentoss=DocumentoSector::all();
-        return view('documento_sector', ['documentoss'=>$documentoss]);
+        $DocumentosF=DocumentosF::all();
+        $documentoss=DocumentoSector::with('DocumentosF')->get();
+        return view('documento_sector', ['documentoss'=>$documentoss, 'DocumentosF'=>$DocumentosF]);
     }
 
     /**
