@@ -215,10 +215,10 @@ header{
       <td>{{$actividades->Codigo_Actividad_CAEB}}</td>
       <td>{{$actividades->Descripcion_o_producto_SIN}}</td>
       <td>
-      <form action="{{route('actividad.destroy', $actividades->id)}}" method="POST">
+      <form action="{{route('actividad.destroy', $actividades->id)}}" method="POST" style="display:inline;">
         @csrf
         {{method_field('DELETE')}}
-    <button class="btn border-0" type="submit" value="Eliminar" onclick="return EliminarActividad('Eliminar Actividad')"><i class="fa-solid fa-trash"></i></a></button>
+    <button class="btn border-0" type="submit" value="Eliminar" onclick="return EliminarActividad('Eliminar Actividad')"><i class="fa-solid fa-trash"></i></a></button></form>
       <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square" ></i></a>
       <a href="" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
       </td>
