@@ -60,6 +60,7 @@ Route::post('/unidad', [UnidadController::class, 'store'])->name('unidad.store')
 Route::delete('/unidad/{id}', [UnidadController::class, 'destroy'])->name('unidad.destroy');
 Route::put('/unidad/{id}', [UnidadController::class, 'update'])->name('unidad.update');
 
+Route::get('/clientes/buscarPorNit', [ClienteController::class, 'buscarPorNit'])->name('cliente.buscarPorNit');
 Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
 Route::get('/cliente/crear', [ClienteController::class, 'create'])->name('cliente.create');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');

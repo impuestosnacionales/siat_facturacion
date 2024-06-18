@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -256,6 +257,44 @@
             </main>
         </div>
     </div>
+=======
+@extends('base')
+@section('name1')
+    Facturación Porta Web en Línea - Gestión de Productos/Servicios
+@endsection
+@section('name')
+    Listado de Productos/Servicios habilitados a su NIT
+@endsection
+@section('content')
+    <a href="{{ route('producto.create') }}" class="btn btn-success" role="button">Añadir <i class="bi bi-plus-square"></i></a>
+    <hr>
+    <table id="tab" class="table ">
+        <tr>
+            <th>N°</th>
+            <th>Código Producto SIN</th>
+            <th>Código Actividad CAEB</th>
+            <th>Descripción Producto SIN</th>
+            <th>Código Producto Contribuyente</th>
+            <th>Descripción Producto Contribuyente</th>
+            <th>Precio</th>
+            <th>Unidad de Medida</th>
+        </tr>
+        @foreach ($producto as $producto)
+        <tr>
+            <td>{{ $producto->id}}</td>
+            <td>{{ $producto->sin}}</td>
+            <td>{{ $producto->caeb}}</td>
+            <td>{{ $producto->descp}}</td>
+            <td>{{ $producto->cod_pcontribuyente}}</td>
+            <td>{{ $producto->desc_pcontribuyente}}</td>
+            <td>{{ $producto->precio}}</td>
+            <td>{{ $producto->unidad}}</td>
+        </tr>
+        @endforeach
+    </table>
+@endsection
+<img src="https://fiva.impuestos.gob.bo/gpri/javax.faces.resource/images/LOGO-SIAT.png.xhtml?ln=common" alt="user" width="32" height="32" class="rounded-circle">
+>>>>>>> f8508488237b9f6aa56d9d8da006ec0bbd0577d7
 
     <footer>
         <!-- Coloca el pie de página aquí -->

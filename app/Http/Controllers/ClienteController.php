@@ -9,6 +9,24 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+    // Método para buscar clientes por NIT
+    public function buscarPorNit(Request $request)
+    {
+        $query = Cliente::query();
+        $query->select('clientes.id', 'clientes.razon_social', 'clientes.email', 'clientes.nit', 'clientes.celular',
+                       'clientes.telefono', 'clientes.complemento', 'tipo_documentos.Nombre as tipodoc')
+              ->leftJoin('tipo_documentos', 'tipo_documentos.id', '=', 'clientes.tipodoc_id');
+
+        // Verificar si se proporcionó un NIT para buscar
+        if ($request->filled('nit')) {
+            $query->where('clientes.nit', 'LIKE', '%' . $request->input('nit') . '%');
+        }
+
+        $clientes = $query->get();
+
+        return view('Cliente.cliente', ['cliente' => $clientes]);
+    }
+
     //INDEX
     public function index()
     {

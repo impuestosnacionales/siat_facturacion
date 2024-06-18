@@ -28,7 +28,6 @@ class ImpresionController extends Controller
     public function store(Request $request)
     {
         //
-         
         if ($request->has('logo')) {
             $impresion = new Impresion($request->except('logo'));
             
