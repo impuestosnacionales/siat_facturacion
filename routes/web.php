@@ -14,6 +14,23 @@ use App\Http\Controllers\DocumentosFController;
 use App\Http\Controllers\DocumentoSectorController;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
+use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\RegisterController;
+
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware('auth')->name('home');
+
+Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
+Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
+
+Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
+
+Route::get('/register', [RegisterController::class, 'create'])->name('register.index')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,7 +110,4 @@ Route::get('/actividades/load', [ProductoController::class, 'loadActivities'])->
 
 
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

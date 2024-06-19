@@ -20,7 +20,7 @@
             
             <div class=" box-2 d-flex flex-column h-100">
                 <div class="mt-5">
-                    <form action="{{route('login')}}" method="post">
+                    <form action="{{ route('login.store') }}" method="post">
                     @csrf
                     
                     <div class="card text-center">
@@ -28,17 +28,25 @@
                         <div class="card-body">
                             <p class="card-text">Ingrese sus datos para iniciar sesión</p> 
                             
-                            <div class="form-floating col-12 col-md-12 col-sm-12 col-xs-12">
-                                <br><input type="email" name="email" class="form-control" id="floatingNit" placeholder="Correo">
-                                <label for="floatingNit">Correo</label>
-                            </div><br>
-                            <div class="form-floating col-12 col-md-12 col-sm-12 col-xs-12">
-                                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
-                                <label for="floatingPassword">Contraseña</label>
-                            </div><br>
+                            <input type="email" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Email" id="email" name="email" value="{{ old('email') }}" required>
+
+        @error('email')
+            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+        @enderror
+
+        <input type="password" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Contraseña" id="password" name="password" required>
+
+        @error('password')
+            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+        @enderror
+
+        <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="NIT" id="nit" name="nit" value="{{ old('nit') }}" required>
+
+        @error('nit')
+            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+        @enderror
                         </div>
                     </div>
-                    <!--<p class="small mb-2 pb-lg-2"><a class="text-muted footer" href="#!">Olvidaste tu contraseña?</a></p>-->
                     <div class="col-12 col-md-12 col-sm-12 col-xs-12">
                         <button class="col-12 col-md-12 col-sm-12 col-xs-12 btn btn-primary btn-lg btn-block" type="submit">Ingresar</button>
                     </div>
