@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('casos_esp',['ninguno','99001','99002','99003']);
             $table->date('fecha');
-            $table->integer('cod_auto');
+            $table->string('cod_auto')->unique();;
             $table->unsignedBigInteger('id_sucursal');
             $table->foreign('id_sucursal')->references('id')->on('sucursales')->onDelete('cascade');
             $table->unsignedBigInteger('id_actividad');
