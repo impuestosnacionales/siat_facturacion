@@ -18,4 +18,7 @@ class Producto extends Model
     public function actividad(){
         return $this->belongsTo(Actividad::class);
     }
+    public function factura(){
+        return $this->belongsToMany(Factura::class, 'detalle_facturas');
+    }
 }

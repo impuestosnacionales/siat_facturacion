@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ContribuyenteController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\TipoDocumentoController;
@@ -55,6 +56,9 @@ Route::get('/pdf', function(){
     $pdf = PDF::loadView('actividad');
     return $pdf->stream();
 })->name('pdf');
+
+Route::get('/factura', [FacturaController::class, 'index'])->name('factura');
+Route::post('/factura', [FacturaController::class, 'store'])->name('factura.store');
 
 Route::get('/sucursal', [SucursalController::class, 'index'])->name('sucursal');
 Route::post('/sucursal', [SucursalController::class, 'store'])->name('sucursal.store');
