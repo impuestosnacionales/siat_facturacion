@@ -40,7 +40,7 @@ class FacturaController extends Controller
         ->leftJoin('users', 'users.id', '=', 'facturas.id_user')
         ->get();
         //dd($empleado);
-        return view('Facturas.factura',[
+        return view('Facturas.factura_tabla',[
             'factura'=>$factura,
             'actividad' => $actividad,
             'sucursal' => $sucursal,
@@ -55,6 +55,20 @@ class FacturaController extends Controller
      */
     public function create()
     {
+        $producto=Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
+                ->select('productos.*', 'unidades.nombre as unidad_nombre')
+                ->get();
+        $actividad = Actividad::all();
+        $sucursal = Sucursal::all();
+        $tipodoc = Tipo_documento::all();
+        $user = User::all();
+        return view('Facturas.factura', [
+            'actividad' => $actividad,
+            'sucursal' => $sucursal,
+            'tipodoc' => $tipodoc,
+            'user' => $user,
+            'producto' => $producto,
+        ]);
     }
 
     /**
@@ -127,8 +141,9 @@ class FacturaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Factura $factura)
-    {
-        //
+    public function destroy($id){
+        $factura = Factura::findOrFail($id);
+        $factura->delete();
+        return redirect()->action([FacturaController::class, 'index']);
     }
 }

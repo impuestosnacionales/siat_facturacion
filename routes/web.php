@@ -52,6 +52,7 @@ Route::get('/pdf', function(){
 })->name('pdf');
 
 Route::get('/factura', [FacturaController::class, 'index'])->name('factura');
+Route::get('/factura/crear',[FacturaController::class,'create'])->name('factura.create');
 Route::post('/factura', [FacturaController::class, 'store'])->name('factura.store');
 
 Route::get('/sucursal', [SucursalController::class, 'index'])->name('sucursal');

@@ -103,10 +103,11 @@
         </div>
         <div class="col-6 mb-3">
             <div class="form-group">
-                <label>Unidad Medida: </label><br>
-                <label id="punidad"></label>
+                <label>Descuento(Bs): </label>
+                <input type="number" id="pdescuento" class="form-control" placeholder="0.0000"/>
             </div>
         </div>
+        
     </div>
     <div class="row">
         <div class="col-6 mb-3">
@@ -117,14 +118,12 @@
         </div>
         <div class="col-6 mb-3">
             <div class="form-group">
-                <label>Descuento(Bs): </label>
-                <input type="number" id="pdescuento" class="form-control" placeholder="0.0000"/>
+                <label>Unidad Medida: </label><br>
+                <label id="punidad"></label>
             </div>
         </div>
     </div>
-    <div class="row">
-        <button type="button" class="btn btn-success" id="bt_agregar">AGREGAR</button>
-    </div>
+        <button type="button" class="btn btn-success btn-sm justify-content-end" id="bt_agregar">Agregar</button>
 </div>
     <div class="row">
         <table class="table">
@@ -151,34 +150,6 @@
         </div>
     </div>
 </form>
-<table id="tab" class="table">
-    <thead>
-        <tr>
-            <th>N°</th>
-            <th>Código Producto SIN</th>
-            <th>Código Actividad CAEB</th>
-            <th>Descripción Producto SIN</th>
-            <th>Código Producto Contribuyente</th>
-            <th>Descripción Producto Contribuyente</th>
-            <th>Precio</th>
-            <th>Unidad de Medida</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($factura as $factura)
-        <tr>
-            <td>{{ $factura->id }}</td>
-            <td>{{ $factura->casos_esp }}</td>
-            <td>{{ $factura->fecha }}</td>
-            <td>{{ $factura->cod_auto }}</td>
-            <td>{{ $factura->sucursal }}</td>
-            <td>{{ $factura->actividad }}</td>
-            <td>{{ $factura->tipodoc }}</td>
-            <td>{{ $factura->razons }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
 
 @endsection
 @section('js')
