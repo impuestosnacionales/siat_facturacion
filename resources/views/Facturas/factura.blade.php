@@ -28,7 +28,7 @@
         <div class="col-12 mb-3">
             <label>Casos Especiales: </label>
             <input type="radio" id="ninguno" name="casos_esp" value="ninguno" checked>
-            <label for="ninguno">Ninguno</label>
+            <label for="ninguno">Ninguno</label> 
             <input type="radio" id="99001" name="casos_esp" value="99001">
             <label for="99001">9901(Extranjero no inscrito)</label>
             <input type="radio" id="99002" name="casos_esp" value="99002">
@@ -122,9 +122,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <button type="button" class="btn btn-success" id="bt_agregar">AGREGAR</button>
+    <div class="row justify-content-end">
+    <div class="col-auto">
+        <button type="button" class="btn btn-success btn-sm" id="bt_agregar">AGREGAR</button>
     </div>
+</div>
+
 </div>
     <div class="row">
         <table class="table">
@@ -145,8 +148,8 @@
         </table>
         <hr>
     </div>
-    <div class="form-group row">
-        <div class="col-12">
+    <div class="row justify-content-end">
+        <div class="col-auto">
             <input class="btn btn-success form-control" type="submit" value="Añadir">
         </div>
     </div>

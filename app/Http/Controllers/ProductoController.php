@@ -21,7 +21,6 @@ class ProductoController extends Controller
      */
     public function index(Request $request)
     {
-<<<<<<< HEAD
         $unidad = Unidad::all();
 
         // Aplicar búsqueda por descripción de Producto SIN si existe
@@ -51,7 +50,6 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $producto = new Producto($request->all());
-=======
         //
         $producto= DB::table('productos')
         ->select('productos.id','productos.cod_pcontribuyente','productos.desc_pcontribuyente',
@@ -69,15 +67,6 @@ class ProductoController extends Controller
         $unidad = Unidad::all();
         $actividad = Actividad::all();
         return view('Producto.producto_crear',['unidad' => $unidad],['actividad' => $actividad]);
-    }
-    //STORE ayuda a crear nuevo curso en la bd
-    public function store(Request $request){
-        //
-        $producto= new Producto($request->all());
-        //dd($producto);
->>>>>>> 0eaa1828111dcb33d8c70d1a56c1654d07cf007d
-        $producto->save();
-        return redirect()->route('producto.index');
     }
 
     public function show($id)
