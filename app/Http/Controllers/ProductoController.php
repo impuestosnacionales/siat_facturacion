@@ -22,6 +22,7 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         $unidad = Unidad::all();
+        $actividad = Actividad::all();
 
         // Aplicar búsqueda por descripción de Producto SIN si existe
         $query = Actividad::query();
@@ -50,6 +51,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $producto = new Producto($request->all());
+        $actividad = Actividad::all();
         //
         $producto= DB::table('productos')
         ->select('productos.id','productos.cod_pcontribuyente','productos.desc_pcontribuyente',

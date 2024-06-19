@@ -7,13 +7,12 @@
     <thead>
         <tr>
             <th>N°</th>
-            <th>Código Producto SIN</th>
-            <th>Código Actividad CAEB</th>
-            <th>Descripción Producto SIN</th>
-            <th>Código Producto Contribuyente</th>
-            <th>Descripción Producto Contribuyente</th>
-            <th>Precio</th>
-            <th>Unidad de Medida</th>
+            <th>Casos Especiales</th>
+            <th>Fecha</th>
+            <th>Sucursal</th>
+            <th>Actividad Económica</th>
+            <th>Tipo de Documento</th>
+            <th>Nombre Razón Social</th>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +21,6 @@
             <td>{{ $factura->id }}</td>
             <td>{{ $factura->casos_esp }}</td>
             <td>{{ $factura->fecha }}</td>
-            <td>{{ $factura->cod_auto }}</td>
             <td>{{ $factura->sucursal }}</td>
             <td>{{ $factura->actividad }}</td>
             <td>{{ $factura->tipodoc }}</td>
