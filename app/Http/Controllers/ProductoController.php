@@ -21,7 +21,7 @@ class ProductoController extends Controller
     public function index()
     {
         $unidad = Unidad::all();
-        $actividad = Actividad::all();
+        $actividad = Actividad::paginate(5); // Paginar por 10 elementos por página
         $producto = DB::table('productos')
             ->select('productos.id','productos.cod_pcontribuyente','productos.desc_pcontribuyente',
             'productos.precio',
@@ -38,13 +38,7 @@ class ProductoController extends Controller
         ]);
     }
     
-    //CREATE
-    public function create(){
-        //
-        $unidad = Unidad::all();
-        $actividad = Actividad::all();
-        return view('Producto.producto_crear',['unidad' => $unidad],['actividad' => $actividad]);
-    }
+
     //STORE ayuda a crear nuevo curso en la bd
     public function store(Request $request){
         //

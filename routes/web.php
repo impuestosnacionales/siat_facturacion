@@ -89,6 +89,8 @@ Route::get('/producto/{id}/ver', [ProductoController::class, 'show'])->name('pro
 Route::delete('/producto/{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
 Route::get('/producto/{id}/editar', [ProductoController::class, 'edit'])->name('producto.edit');
 Route::put('/producto/{id}', [ProductoController::class, 'update'])->name('producto.update');
+Route::get('/actividades/load', [ProductoController::class, 'loadActivities'])->name('actividades.load');
+
 
 
 Auth::routes();
