@@ -125,7 +125,7 @@
     </div>
     <div class="row justify-content-end">
     <div class="col-auto">
-        <button type="button" class="btn btn-success btn-sm" id="bt_agregar">AGREGAR</button>
+        <button type="button" class="btn btn-success btn-sm" id="bt_agregar">Agregar</button>
     </div>
 </div>
 
