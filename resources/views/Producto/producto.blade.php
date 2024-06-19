@@ -118,104 +118,129 @@
                                             <h3 class="card-title">Listado de Productos/Servicios habilitados a su NIT</h3>
                                             <hr>
                                             <div><a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalCrear">Agregar <i class="bi bi-person-plus"></i></a></div>
-                                            <!-- Modal crear -->
-                                            <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- Cambiado a modal-lg para hacerlo más grande -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Documentos por sector</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Formulario de creación de productos -->
-                <form action="{{ route('producto.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <!-- Modal crear -->
+                        <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg"> <!-- Cambiado a modal-lg para hacerlo más grande -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Agregar Documentos por sector</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Formulario de creación de productos -->
+                                        <form action="{{ route('producto.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="table actividad-economica">Listado de Productos y Servicios Asignados por su(s) Actividad(es) Economica(s)</h4>
-                            <table id="tabact" class="table" class="table actividad-economica">
-                                <thead>
-                                    <tr>
-                                        <th>N°</th>
-                                        <th>Código Producto SIN</th>
-                                        <th>Código Actividad CAEB</th>
-                                        <th>Descripción Producto SIN</th>
-                                        <th>Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($actividad as $act)
-                                    <tr>
-                                        <td id="pid_actividad_{{ $act->id }}">{{ $act->id }}</td>
-                                        <td id="psin2_{{ $act->id }}">{{ $act->Codigo_Producto_SIN }}</td>
-                                        <td id="pcaeb2_{{ $act->id }}">{{ $act->Codigo_Actividad_CAEB }}</td>
-                                        <td id="pdescp2_{{ $act->id }}">{{ $act->Descripcion_o_producto_SIN }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-success bt_seleccionar" data-id="{{ $act->id }}">Seleccionar</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="actividad-economica">Listado de Productos y Servicios Asignados por su(s) Actividad(es) Economica(s)</h4>
+                                                    <table id="tabact" class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>N°</th>
+                                                                <th>Código Producto SIN</th>
+                                                                <th>Código Actividad CAEB</th>
+                                                                <th>Descripción Producto SIN</th>
+                                                                <th>Acción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($actividad as $act)
+                                                            <tr>
+                                                                <td id="pid_actividad_{{ $act->id }}">{{ $act->id }}</td>
+                                                                <td id="psin2_{{ $act->id }}">{{ $act->Codigo_Producto_SIN }}</td>
+                                                                <td id="pcaeb2_{{ $act->id }}">{{ $act->Codigo_Actividad_CAEB }}</td>
+                                                                <td id="pdescp2_{{ $act->id }}">{{ $act->Descripcion_o_producto_SIN }}</td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-success bt_seleccionar" data-id="{{ $act->id }}">Seleccionar</button>
+                                                                </td>
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <style>
+                                                .form-outline {
+                                                    display: flex;
+                                                    align-items: center;
+                                                }
+                                                .form-outline label {
+                                                    flex: 0 0 40%; /* Establece el ancho del label */
+                                                    margin-bottom: 0; /* Elimina el margen inferior del label */
+                                                }
+                                                .form-outline input,
+                                                .form-outline select {
+                                                    flex: 1; /* Establece que el input y select ocupen todo el espacio restante */
+                                                    margin-left: 10px; /* Ajusta el margen izquierdo */
+                                                }
+                                                .char-counter {
+                                                    margin-top: 5px; /* Ajusta el margen superior del contador */
+                                                    font-size: 12px; /* Tamaño de fuente del contador */
+                                                    color: #6c757d; /* Color del contador */
+                                                }
+                                            </style>
+                                            <div class="oculto" style="display: none;">
+                                                <div class="row mb-3">
+                                                    <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Código Producto SIN: </strong></label>
+                                                        <label id="psin" name="sin"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Código Actividad CAEB: </strong></label>
+                                                        <label id="pcaeb" name="caeb"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Descripción Producto SIN: </strong></label>
+                                                        <label id="pdescp" name="descp"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Código Producto Contribuyente:</strong></label>
+                                                        <input type="text" name="cod_pcontribuyente" class="form-control" placeholder="Digite codigo del producto"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Descripción Producto Contribuyente:</strong></label>
+                                                        <textarea name="desc_pcontribuyente" id="coso" class="form-control" placeholder="Escriba la descripción del producto" style="width: 100%;"cols="20" rows="5"></textarea>
+                                                    </div>
+                                                    <div id="char-counter" class="char-counter" class="row mb-2" style="display: flex; justify-content: flex-end;">500 caracteres restantes</div>
+                                                </div>
 
-                    <br>
-                    <div class="oculto" style="display: none;">
-                        <div class="row">
-                            <div class="form-outline col-lg-6 col-md-6">
-                                <label class="form-label"><strong>Código Producto SIN:</strong></label>
-                                <label id="psin" name="sin"></label>
-                            </div>
-                            <div class="form-outline col-lg-6 col-md-6">
-                                <label class="form-label"><strong>Código Actividad CAEB:</strong></label>
-                                <label id="pcaeb" name="caeb"></label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-outline col-lg-12 col-md-12">
-                                <label class="form-label"><strong>Descripción Producto SIN:</strong></label>
-                                <label id="pdescp" name="descp"></label>
-                            </div>
-                        </div>
+                                                <div class="row mb-3">
+                                                    <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Precio:</strong></label>
+                                                        <input type="number" name="precio" class="form-control" placeholder="0.0000"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                <div class="form-outline col-lg-12 col-md-12">
+                                                        <label class="form-label"><strong>Unidad de Medida:</strong></label>
+                                                        <select name="unidad_id" id="unidad_id" class="form-control">
+                                                            @foreach ($unidad as $uni)
+                                                            <option value="{{ $uni->id }}">{{ $uni->Nombre }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="actividad_id" name="actividad_id">
+                                                <br>
+                                                <input class="btn btn-danger" type="submit" value="Añadir">
+                                            </div>
 
-                        <div class="row">
-                            <div class="form-outline col-lg-6 col-md-6">
-                                <label class="form-label"><strong>Código Producto Contribuyente:</strong></label>
-                                <input type="text" name="cod_pcontribuyente" class="form-control"/>
-                            </div>
-                            <div class="form-outline col-lg-6 col-md-6">
-                                <label class="form-label"><strong>Descripción Producto Contribuyente:</strong></label>
-                                <input type="text" name="desc_pcontribuyente" class="form-control"/>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-outline col-lg-6 col-md-6">
-                                <label class="form-label"><strong>Precio:</strong></label>
-                                <input type="number" name="precio" class="form-control"/>
-                            </div>
-                            <div class="form-outline col-lg-6 col-md-6">
-                                <label class="form-label"><strong>Unidad de Medida:</strong></label>
-                                <select name="unidad_id" id="unidad_id" class="form-control">
-                                    @foreach ($unidad as $uni)
-                                    <option value="{{ $uni->id }}">{{ $uni->Nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <input type="hidden" id="actividad_id" name="actividad_id">
-                        <br>
-                        <input class="btn btn-danger" type="submit" value="Añadir">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-                                            <!-- Modal crear -->
+                        <!-- Modal crear -->
                                         </div>
                                         <div class="card-body">
                                             <table id="tab" class="table">
@@ -297,31 +322,55 @@
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-$(document).ready(function(){
-    $('.bt_seleccionar').click(function(){
-        var id = $(this).data('id');
-        var codigoProductoSIN = $('#psin2_' + id).text();
-        var codigoActividadCAEB = $('#pcaeb2_' + id).text();
-        var descripcionProductoSIN = $('#pdescp2_' + id).text();
+    $(document).ready(function(){
+        $('.bt_seleccionar').click(function(){
+            var id = $(this).data('id');
+            var codigoProductoSIN = $('#psin2_' + id).text().trim();
+            var codigoActividadCAEB = $('#pcaeb2_' + id).text().trim();
+            var descripcionProductoSIN = $('#pdescp2_' + id).text().trim();
 
-        // Asignar valores a los elementos del formulario
-        $('#psin').text(codigoProductoSIN);
-        $('#pcaeb').text(codigoActividadCAEB);
-        $('#pdescp').text(descripcionProductoSIN);
-        $('#actividad_id').val(id);
+            // Asignar valores a los elementos del formulario oculto
+            $('#psin').text(codigoProductoSIN);
+            $('#pcaeb').text(codigoActividadCAEB);
+            $('#pdescp').text(descripcionProductoSIN);
+            $('#actividad_id').val(id);
 
-        // Ocultar la sección de actividad económica
-        $('.actividad-economica').hide();
+            // Asignar la descripción del producto al campo visible
+            $('#desc_pcontribuyente').val(descripcionProductoSIN);
 
-        // Mostrar el formulario oculto
-        $('.oculto').show();
+            // Ocultar la sección de actividad económica completa
+            $('.card-body').hide();
 
-        // Enfocar el primer campo del formulario oculto
-        $('.oculto input:first').focus();
+            // Mostrar el formulario oculto
+            $('.oculto').show();
+
+            // Enfocar el primer campo del formulario oculto
+            $('#desc_pcontribuyente').focus();
+        });
+
+        // Mostrar la sección de actividad económica y ocultar el formulario oculto al cerrar el modal
+        $('#ModalCrear').on('hidden.bs.modal', function () {
+            $('.card-body').show();
+            $('.oculto').hide();
+        });
+
+       // Contador de caracteres para el textarea
+       $('#coso').on('input', function() {
+            var maxLength = 500;
+            var currentLength = $(this).val().length;
+            var remaining = maxLength - currentLength;
+            if (remaining >= 0) {
+                $('#char-counter').text(remaining + ' caracteres restantes');
+            } else {
+                $('#char-counter').text('0 caracteres restantes');
+                var truncatedText = $(this).val().substring(0, maxLength);
+                $(this).val(truncatedText);
+            }
+        });
     });
-});
+</script>
 
-    </script>
+
 </body>
 
 </html>

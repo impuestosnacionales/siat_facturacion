@@ -218,7 +218,6 @@ header{
         </main>
     </div>
 </div>
-
 <script>
     $(document).ready(function(){
         $('.bt_seleccionar').click(function(){
@@ -231,6 +230,10 @@ header{
             $('#pcaeb').text(codigoActividadCAEB);
             $('#pdescp').text(descripcionProductoSIN);
             $('#actividad_id').val(id);
+
+            // Mostrar el formulario y ocultar la tabla
+            $('#product-table').hide();
+            $('#product-form').show();
         });
     });
 </script>
