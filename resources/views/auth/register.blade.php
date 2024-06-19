@@ -21,7 +21,7 @@
                 <div class="mt-5">
                     <div class="d-flex flex-column ">
                     <div class="d-flex align-items-center">
-                        <form action="{{route('register')}}" method="post">
+                        <form action="{{route('register.store')}}" method="post">
                         @csrf
 
                         <div class="card text-center">
@@ -31,28 +31,62 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                    <input type="text" name="name"  id="form3Example1" class="form-control" placeholder="Nombre" />
+                                        <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Usuario" id="name" name="name">
+
+                                        @error('name')
+                                            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                        @enderror                                    
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                    <input type="text" name="last_name" id="form3Example2" class="form-control" placeholder="Apellido" />
+                                        <input type="email" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Email" id="email" name="email">
+
+                                        @error('email')
+                                            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                        @enderror                                
+                                    </div>
                                 </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        @error('nit')
+                                            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                        @enderror
+                                        <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="NIT" id="nit" name="nit">              
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        @error('nombrers')
+                                            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                        @enderror
+                                        <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Nombre o Razón Social" id="nombrers" name="nombrers">
+                                                                
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        @error('id_rol')
+                                            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                        @enderror
+
+                                        <label class="form-label">Rol</label>
+                                        <select class="form-select" name="id_rol" id="id_rol" aria-label="Default select example">
+                                            @foreach ($roles as $rol)
+                                                <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                            @endforeach
+                                        </select>                     
+                                    </div>
+                                </div>
+                                <input type="password" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Contraseña" id="password" name="password">
+
+        @error('password')
+            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+        @enderror
+
+        <input type="password" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Confirma tu contraseña" id="password_confirmation" name="password_confirmation">
+
                             </div>
-                        </div>
-
-                        <!-- Email input -->
-                        <div class="form-outline mb-4">
-                            <input type="email" name="email" id="form3Example3" class="form-control" placeholder="Correo" />
-                        </div>
-
-                        <!-- Password input -->
-                        <div class="form-outline mb-4">
-                            <input type="password" name="password" id="form3Example4" class="form-control" placeholder="Contraseña" />
-                        </div>
-                        <div class="form-outline mb-4">
-                            <input type="password" name="password_confirmation" id="form3Example4" class="form-control" placeholder="Confirmar Contraseña" />
-                        </div>
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary btn-block mb-4">Registrar</button>
                             </div>
