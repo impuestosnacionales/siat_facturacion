@@ -13,6 +13,8 @@ use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\DocumentosFController;
 use App\Http\Controllers\DocumentoSectorController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RolController;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 use App\Http\Controllers\SessionsController;
@@ -22,6 +24,10 @@ use App\Http\Controllers\RegisterController;
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth')->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/grafico', [HomeController::class, 'grafico'])->name('chart');
+Route::get('/grafico-roles', [RolController::class, 'grafico'])->name('chart.roles');
 
 Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
 Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
@@ -98,6 +104,7 @@ Route::put('/tipodoc/{id}', [TipoDocumentoController::class, 'update'])->name('t
 Route::get('/impresion', [ImpresionController::class, 'index'])->name('impresion');
 Route::get('/impresion/crear', [ImpresionController::class, 'create'])->name('impresion.create');
 Route::post('/impresion', [ImpresionController::class, 'store'])->name('impresion.store');
+Route::delete('/impresion/{id}', [ImpresionController::class, 'destroy'])->name('impresion.destroy');
 
 Route::get('/dependencia', [DependenciaController::class, 'index'])->name('dependencia');
 Route::post('/dependencia', [DependenciaController::class, 'store'])->name('dependencia.store');
@@ -105,11 +112,8 @@ Route::delete('/dependencia/{id}', [DependenciaController::class, 'destroy'])->n
 Route::put('/dependencia/{id}', [DependenciaController::class, 'update'])->name('dependencia.update');
 
 Route::get('/producto', [ProductoController::class, 'index'])->name('producto');
-Route::get('/producto/crear', [ProductoController::class, 'create'])->name('producto.create');
 Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
-Route::get('/producto/{id}/ver', [ProductoController::class, 'show'])->name('producto.show');
 Route::delete('/producto/{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
-Route::get('/producto/{id}/editar', [ProductoController::class, 'edit'])->name('producto.edit');
 Route::put('/producto/{id}', [ProductoController::class, 'update'])->name('producto.update');
 Route::get('/actividades/load', [ProductoController::class, 'loadActivities'])->name('actividades.load');
 

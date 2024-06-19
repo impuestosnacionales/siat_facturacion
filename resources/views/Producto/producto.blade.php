@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/2713879efc.js" crossorigin="anonymous"></script>
+
 
     <style>
         header {
@@ -256,6 +258,7 @@
                                                         <th>Descripción Producto Contribuyente</th>
                                                         <th>Precio</th>
                                                         <th>Unidad de Medida</th>
+                                                        <th>‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -269,6 +272,35 @@
                                                         <td>{{ $prod->desc_pcontribuyente }}</td>
                                                         <td>{{ $prod->precio }}</td>
                                                         <td>{{ $prod->unidad }}</td>
+                                                        <td>
+                                                        <form action="{{route('producto.destroy', $prod->id)}}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                {{method_field('DELETE')}}
+                                                        <button class="btn border-0" type="submit" value="Eliminar" onclick="return Eliminar Producto('Eliminar Producto')"><i class="fa-solid fa-trash"></i></a></button></form>
+                                                        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square" ></i></a>
+                                                        </td>
+                                                        <!--Modal editar-->
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1></font>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            <form action="{{route('producto.update', $prod->id)}}" method="POST">
+                                                            @csrf
+                                                                {{method_field('PUT')}}
+                                                        <div class="mb-3">
+                                                            <label for="exampleInputEmail1" class="form-label">Descripcion Producto Contribuyente</label>
+                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="desc_pcontribuyente" value="{{$prod->desc_pcontribuyente}}">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                                        </form>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -284,7 +316,6 @@
         </div>
     </div>
 @section('content')
-    <a href="{{ route('producto.create') }}" class="btn btn-success" role="button">Añadir <i class="bi bi-plus-square"></i></a>
     <hr>
     <table id="tab" class="table ">
         <tr>
@@ -296,6 +327,7 @@
             <th>Descripción Producto Contribuyente</th>
             <th>Precio</th>
             <th>Unidad de Medida</th>
+            <th>Operaciones </th>
         </tr>
         @foreach ($producto as $producto)
         <tr>
@@ -307,6 +339,9 @@
             <td>{{ $producto->desc_pcontribuyente}}</td>
             <td>{{ $producto->precio}}</td>
             <td>{{ $producto->unidad}}</td>
+            <td>
+            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square" ></i></a>
+            </td>
         </tr>
         @endforeach
     </table>
