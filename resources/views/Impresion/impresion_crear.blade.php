@@ -118,82 +118,59 @@ header{
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-sm-12 col-xs-12">
-                                <form action="{{ route('impresion.store') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <h1>Registro y Configuración de Logo</h1>
-                                    <br>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h2 class="card-title">Logo Institucional</h4>
-                                        </div>
-                                        <div class="card-body">
-                                        <!-- Elemento para mostrar la vista previa de la imagen -->
-                                        <div id="contenedorVistaPrevia" style="display: none;">
-                                            <img id="vistaPrevia" src="#" alt="Vista previa de la imagen" style="max-width: 200px; max-height: 200px;">
-                                        </div>
-                                        <input type="file" id="logo" name="logo" accept="image/png, image/jpeg">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h2 class="card-title">Configuración de Impresión</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <label for=""><strong>Tipos de impresión:</strong></label><br>
-                                            <input type="radio" id="rollo" name="tipoimp" value="rollo" checked>
-                                            <label for="rollo">En Rollo</label>
-                                            <input type="radio" id="papel_carta" name="tipoimp" value="carta">
-                                            <label for="papel_carta">En Papel Carta</label>
-                                            <div>
-                                                <input class="btn btn-primary" type="submit" value="Guardar">
-                                            </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <form action="{{ route('impresion.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <h1>Registro y Configuración de Logo</h1>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Logo Institucional</h4>
+        </div>
+        <div class="card-body">
+            <div id="contenedorVistaPrevia" style="display: none;">
+                <img id="vistaPrevia" src="#" alt="Vista previa de la imagen" style="max-width: 200px; max-height: 200px;">
             </div>
-        </main>
+            <input type="file" id="logo" name="logo" accept="image/png, image/jpeg">
+        </div>
     </div>
-</div>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Configuración de Impresión</h4>
+        </div>
+        <div class="card-body">
+            <label for=""><strong>Tipos de impresión:</strong></label><br>
+            <input type="radio" id="rollo" name="tipoimp" value="rollo" checked>
+            <label for="rollo">En Rollo</label>
+            <input type="radio" id="papel_carta" name="tipoimp" value="carta">
+            <label for="papel_carta">En Papel Carta</label>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Guardar">
+            </div>
+        </div>
+    </div>
+</form>
+
 <!-- Script para manejar la vista previa de la imagen -->
 <script>
-    // Obtener el input de archivo
     const inputLogo = document.getElementById('logo');
-    // Obtener el elemento de vista previa de la imagen
     const vistaPrevia = document.getElementById('vistaPrevia');
-    // Obtener el campo oculto para almacenar la URL de la imagen
-    const urlImagenInput = document.getElementById('urlImagen');
-    // Obtener el contenedor de la vista previa
     const contenedorVistaPrevia = document.getElementById('contenedorVistaPrevia');
 
-    // Agregar un evento change al input de archivo
     inputLogo.addEventListener('change', function() {
-        // Verificar si se seleccionó un archivo
         if (this.files && this.files[0]) {
-            // Crear un objeto FileReader para leer el archivo
             const lector = new FileReader();
-
-            // Cuando se carga el archivo, mostrar la vista previa
             lector.onload = function(e) {
                 vistaPrevia.src = e.target.result;
-                // Mostrar el contenedor de la vista previa
                 contenedorVistaPrevia.style.display = 'block';
             }
-
-            // Leer el archivo como una URL de datos
             lector.readAsDataURL(this.files[0]);
         } else {
-            // Si no se selecciona un archivo, ocultar el contenedor de la vista previa
             vistaPrevia.src = '#';
             contenedorVistaPrevia.style.display = 'none';
         }
     });
-
-    
 </script>
 <img src="https://fiva.impuestos.gob.bo/gpri/javax.faces.resource/images/LOGO-SIAT.png.xhtml?ln=common" alt="user" width="32" height="32" class="rounded-circle">
   <!-- Bootstrap JavaScript Libraries -->

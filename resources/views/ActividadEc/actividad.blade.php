@@ -333,38 +333,39 @@ header{
     <!-- place footer here -->
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script>
     $(document).ready(function(){
         $('#bt_agregar').click(function(){
             agregar();
         });
     });
-    var cont=0;
-    var indice=0;
+
+    var cont = 0;
+
     function agregar() {
-    var codigo = $("#p_codigo").val();
-    var actividad = $("#p_actividad").val();
-    var descripcion = $("#p_descripcion").val();
-    if (codigo != 0 && codigo > 0 && actividad != 0 && actividad > 0 && descripcion != "") {
-        var fila = '<tr class="selected" id="fila_' + cont + '"><td><button type="button" class="btn btn-danger" onclick="eliminar(' + cont + ')">X</button></td><td style="visibility:collapse; display:none;"> <input type="hidden"  name="indice" value="' + cont + '" ></td><td><input type="number" name="Codigo_Producto_SIN[]" value="' + codigo + '"></td><td><input type="number" name="Codigo_Actividad_CAEB[]" value="' + actividad + '"></td><td><input type="text" name="Descripcion_o_producto_SIN[]" value="' + descripcion + '"></td></tr>';
-        indice++;
-        cont++;
-        $('#tabla_body').append(fila);
-    } else {
-        alert("Por favor rellene los campos faltantes");
+      var codigo = parseInt($("#p_codigo").val());
+      var actividad = parseInt($("#p_actividad").val());
+      var descripcion = $("#p_descripcion").val();
+
+      if (!isNaN(codigo) && codigo >= 1 && !isNaN(actividad) && actividad >= 1 && descripcion.trim() !== "") {
+          var fila = '<tr class="selected" id="fila_' + cont + '"><td><button type="button" class="btn btn-danger" onclick="eliminar(event, ' + cont + ')">X</button></td><td style="visibility:collapse; display:none;"> <input type="hidden" name="indice" value="' + cont + '"></td><td><input type="number" name="Codigo_Producto_SIN[]" value="' + codigo + '"></td><td><input type="number" name="Codigo_Actividad_CAEB[]" value="' + actividad + '"></td><td><input type="text" name="Descripcion_o_producto_SIN[]" value="' + descripcion + '"></td></tr>';
+          cont++;
+          $('#tabla_body').append(fila);
+      } else {
+          alert("Por favor rellene los campos faltantes");
+      }
     }
-}
-function eliminar(indice) {
-    $("#fila_" + indice).remove();
-}
-</script>
+
+    function eliminar(event, indice) {
+      event.preventDefault();  // Evita el comportamiento predeterminado del botón
+      $("#fila_" + indice).remove();
+    }
+  </script>
+
 </body>
 
 </html>
