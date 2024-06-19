@@ -9,7 +9,11 @@ use App\Models\Actividad;
 use App\Models\Producto;
 use App\Models\Sucursal;
 use App\Models\Tipo_documento;
+use App\Models\Detalle_factura;
 use App\Models\User;
+use App\Models\Unidad;
+use Illuminate\Support\Str; // Asegúrate de importar la clase Str
+
 
 class FacturaController extends Controller
 {
@@ -19,7 +23,9 @@ class FacturaController extends Controller
     public function index()
     {
         //
-        $producto=Producto::all();
+        $producto=Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
+                ->select('productos.*', 'unidades.nombre as unidad_nombre')
+                ->get();
         $actividad = Actividad::all();
         $sucursal = Sucursal::all();
         $tipodoc = Tipo_documento::all();
@@ -58,19 +64,21 @@ class FacturaController extends Controller
     {
         //
         DB::beginTransaction();
-        $factura=new Factura($request->all());
+        $factura=new Factura;
         $factura->casos_esp=$request->get('casos_esp');
         $factura->fecha=$request->get('fecha');
-        $factura->cod_auto=$request->get('cod_auto');
         $factura->id_sucursal=$request->get('id_sucursal');
         $factura->id_actividad=$request->get('id_actividad');
         $factura->id_tipodoc=$request->get('id_tipodoc');
         $factura->id_user=$request->get('id_user');
+        // Ahora podemos acceder al cod_auto generado automáticamente
+        $cod_auto_generado = $factura->cod_auto;
         //dd($factura);
         $factura->save();
         
         $id_producto=$request->get('id_producto');
-        $cantidad=$request->get('cantidad');
+
+        $cantidad=$request->get ('cantidad');
         $descuento=$request->get('descuento');
         $desc_ad=$request->get('desc_ad');
 
@@ -87,7 +95,7 @@ class FacturaController extends Controller
             $cont=$cont+1;
         }
         DB::commit();
-        $reserva=Reserva::all();
+        return redirect()->action([FacturaController::class,'index']);
     }
 
     /**
