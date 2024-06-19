@@ -159,6 +159,8 @@
                                                             @endforeach
                                                         </tbody>
                                                     </table>
+                                                    {{ $actividad->links() }}
+
                                                 </div>
                                             </div>
                                             <style>

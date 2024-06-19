@@ -43,8 +43,8 @@
                     <div class="card text-center">
                         <img class="card-img-top img-responsive" src="assets/img/SIAT.jpg" alt="SIAT" style="display: block; margin: 0 auto;"/>
                         <div class="card-body">
-                            <p class="card-text">Ingrese sus datos para iniciar sesión</p> 
-                            
+                            <p class="card-text">
+                                Ingrese sus datos para iniciar sesión</p> 
                             <input type="email" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Email" id="email" name="email" value="{{ old('email') }}" required>
                             @error('email')
                                 <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>

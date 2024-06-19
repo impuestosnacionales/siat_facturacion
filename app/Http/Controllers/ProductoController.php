@@ -20,24 +20,17 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $unidad = Unidad::all();
-        $actividad = Actividad::all();
-        $producto = DB::table('productos')
-            ->select('productos.id','productos.cod_pcontribuyente','productos.desc_pcontribuyente',
-            'productos.precio',
-            'unidades.Nombre as unidad','actividades.Codigo_Producto_SIN as sin',
-            'actividades.Codigo_Actividad_CAEB as caeb','actividades.Descripcion_o_producto_SIN as descp')
-            ->leftJoin('unidades','unidades.id','=','productos.unidad_id')
-            ->leftJoin('actividades','actividades.id','=','productos.actividad_id')
-            ->get();
-    
-        return view('Producto.producto', [
-            'producto' => $producto,
-            'unidad' => $unidad,
-            'actividad' => $actividad,
-        ]);
+        //
+        $producto= DB::table('productos')
+        ->select('productos.id','productos.cod_pcontribuyente','productos.desc_pcontribuyente',
+        'productos.precio',
+        'unidades.Nombre as unidad','actividades.Codigo_Producto_SIN as sin',
+        'actividades.Codigo_Actividad_CAEB as caeb','actividades.Descripcion_o_producto_SIN as descp')
+        ->leftJoin('unidades','unidades.id','=','productos.unidad_id')
+        ->leftJoin('actividades','actividades.id','=','productos.actividad_id')
+        ->get();
+        return view('Producto.producto', ['producto'=>$producto]);
     }
-    
     //CREATE
     public function create(){
         //

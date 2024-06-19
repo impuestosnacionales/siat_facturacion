@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
-            $table->string('Descripcion');
-            $table->string('Caracteristicas');
+            $table->enum('casos_esp',['ninguno','99001','99002','99003']);
+            $table->date('fecha');
+            $table->integer('cod_auto');
             $table->unsignedBigInteger('id_sucursal');
             $table->foreign('id_sucursal')->references('id')->on('sucursales')->onDelete('cascade');
+            $table->unsignedBigInteger('id_actividad');
+            $table->foreign('id_actividad')->references('id')->on('actividades')->onDelete('cascade');
             $table->unsignedBigInteger('id_tipodoc');
             $table->foreign('id_tipodoc')->references('id')->on('tipo_documentos')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
