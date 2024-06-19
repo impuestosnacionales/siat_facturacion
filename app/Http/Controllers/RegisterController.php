@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Rol;
+use App\Models\Dependencia;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -17,7 +18,8 @@ class RegisterController extends Controller
     public function create()
     {
         $roles = Rol::all(); // Obtener todos los roles disponibles
-        return view('auth.register', compact('roles'));
+        $dependencias = Dependencia::all(); // Obtener todos las dependencias disponibles
+        return view('auth.register', compact('roles'), compact('dependencias'));
     }
 
     /**
@@ -36,6 +38,7 @@ class RegisterController extends Controller
             'nit' => 'required|integer',
             'nombrers' => 'required|string|max:255',
             'id_rol' => 'required|exists:roles,id',
+            'id_dependencia' => 'required|exists:dependencias,id',
         ]);
 
         // Create the user
@@ -46,6 +49,7 @@ class RegisterController extends Controller
         $user->nit = $validatedData['nit'];
         $user->nombrers = $validatedData['nombrers'];
         $user->id_rol = $validatedData['id_rol'];
+        $user->id_dependencia = $validatedData['id_dependencia'];
         $user->save();
 
         // Automatically log in the newly registered user (if using Laravel's default auth system)

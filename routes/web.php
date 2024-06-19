@@ -25,7 +25,7 @@ Route::get('/home', function () {
 Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
 Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
 
-Route::get('/logout', [SessionsController::class, 'destroy'])->name('login.destroy')->middleware('auth');
+Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'create'])->name('register.index')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -109,4 +109,3 @@ Route::put('/producto/{id}', [ProductoController::class, 'update'])->name('produ
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

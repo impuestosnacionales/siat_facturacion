@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('nombrers')->nullable();
             $table->unsignedBigInteger('id_rol');
             $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade');
+            $table->unsignedBigInteger('id_dependencia');
+            $table->foreign('id_dependencia')->references('id')->on('dependencias')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

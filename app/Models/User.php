@@ -22,6 +22,7 @@ class User extends Authenticatable
         'nit',
         'nombrers',
         'id_rol',
+        'id_dependencia',
     ];
 
     /**
@@ -49,5 +50,9 @@ class User extends Authenticatable
     public function rol()
     {
         return $this->belongsTo(Rol::class, 'id_rol');
+    }
+    public function dependencia()
+    {
+        return $this->belongsTo(Dependencia::class, 'id_dependencia');
     }
 }

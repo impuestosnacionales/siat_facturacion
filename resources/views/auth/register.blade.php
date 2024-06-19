@@ -78,6 +78,20 @@
                                         </select>                     
                                     </div>
                                 </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        @error('id_dependencia')
+                                            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">* {{ $message }}</p>
+                                        @enderror
+
+                                        <label class="form-label">Dependencia</label>
+                                        <select class="form-select" name="id_dependencia" id="id_dependencia" aria-label="Default select example">
+                                            @foreach ($dependencias as $dependencia)
+                                                <option value="{{ $dependencia->id }}">{{ $dependencia->nombre }}</option>
+                                            @endforeach
+                                        </select>                     
+                                    </div>
+                                </div>
                                 <input type="password" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Contraseña" id="password" name="password">
 
         @error('password')
