@@ -11,4 +11,8 @@ class Dependencia extends Model
     protected $primaryKey="id";
     protected $fillable=['nombre', 'tipo', 'region'];
     protected $hidden=['id'];
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

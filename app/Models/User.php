@@ -2,33 +2,41 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'dependencia_id',
         'nit',
-        'nombrers',
-        'id_rol',
-        'id_dependencia',
+        'razon_social',
+        'password',
     ];
+
+    public function dependencia()
+    {
+        return $this->belongsTo(Dependencia::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -38,21 +46,10 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
-
-    /**
-     * Get the role associated with the user.
-     */
-    public function rol()
-    {
-        return $this->belongsTo(Rol::class, 'id_rol');
-    }
-    public function dependencia()
-    {
-        return $this->belongsTo(Dependencia::class, 'id_dependencia');
-    }
 }

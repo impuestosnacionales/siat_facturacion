@@ -17,25 +17,49 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolController;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
-use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AsignarController;
+use Spatie\Permission\Models\Role;
 
 
-Route::get('/home', function () {
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+//ROL SPATIE
+Route::get('/rol',[RoleController::class,'index'])->name('rol');
+/*ruta show  */
+Route::get('/rol/{id}/ver', [RoleController::class, 'show'])->name('rol.show');
+/*RUTA DE ELIMINAR */
+Route::delete('/rol/{id}', [RoleController::class, 'destroy'])->name('rol.destroy');
+/*ruta PARA CREAR */
+Route::get('/rol/crear',[RoleController::class,'create'])->name('rol.create');
+/*RUTA PARA GUARDAD LOS NUEVOS DATOS */
+Route::post('/rol',[RoleController::class,'store'])->name('rol.store');
+/*RUTA EDITAR PARA MOSTRAR EL FORMULARIO PARA EDITAR */
+Route::get('/rol/{id}/editar',[RoleController::class,'edit'])->name('rol.edit');
+/*RUTA UPTADE PARA ACTUALIZAR LO EDITADO */
+Route::put('/rol/{id}',[RoleController::class,'update'])->name('rol.update');
+
+Route::get('/asignar',[AsignarController::class,'index'])->name('asignar');
+Route::get('/asignar_{id}_editar',[AsignarController::class,'edit'])->name('asignar.edit');
+Route::put('/asignar_{id}',[AsignarController::class,'update'])->name('asignar.update');
+
+require __DIR__.'/auth.php';
+
+
+
+Route::get('/dashboard', function () {
     return view('home');
-})->middleware('auth')->name('home');
+})->middleware('auth', 'verified')->name('home');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/grafico', [HomeController::class, 'grafico'])->name('chart');
 Route::get('/grafico-roles', [RolController::class, 'grafico'])->name('chart.roles');
-
-Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
-Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
-
-Route::get('/logout', [SessionsController::class, 'destroy'])->name('logout')->middleware('auth');
-
-Route::get('/register', [RegisterController::class, 'create'])->name('register.index')->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 
 /*
