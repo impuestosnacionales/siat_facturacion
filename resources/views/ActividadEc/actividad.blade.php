@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <br>
-          <a href=""class="btn btn-success" role="button" data-bs-toggle="modal" data-bs-target="#ModalCrear">Añadir <i class="fa-regular fa-square-plus"></i></a>
+  <a href=""class="btn btn-success" role="button" data-bs-toggle="modal" data-bs-target="#ModalCrear">Añadir <i class="fa-regular fa-square-plus"></i></a>
     <!-- Modal -->
     <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
