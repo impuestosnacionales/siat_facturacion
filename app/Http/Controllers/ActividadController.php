@@ -37,31 +37,31 @@ class ActividadController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-        try{
-            DB::beginTransaction();
+{
+    try {
+        DB::beginTransaction();
 
-            $Codigo_Producto_SIN=$request->get('Codigo_Producto_SIN');
-            $Codigo_Actividad_CAEB=$request->get('Codigo_Actividad_CAEB');
-            $Descripcion_o_producto_SIN=$request->get('Descripcion_o_producto_SIN');
-            $cont=0;
-            $i=$request->get('indice');
-            while($cont<$i){
-                $actividad=new Actividad;
-                $actividad->Codigo_Producto_SIN=$Codigo_Producto_SIN[$cont];
-                $actividad->Codigo_Actividad_CAEB=$Codigo_Actividad_CAEB[$cont];
-                $actividad->Descripcion_o_producto_SIN=$Descripcion_o_producto_SIN[$cont];
-                $actividad->save();
-                $cont++;
-            }
-            DB::commit();
+        $indice = $request->input('indice');
+        $codigo_producto_sin = $request->input('Codigo_Producto_SIN');
+        $codigo_actividad_caeb = $request->input('Codigo_Actividad_CAEB');
+        $descripcion_o_producto_sin = $request->input('Descripcion_o_producto_SIN');
 
-        }catch(\Exception $e){
-            DB::rollback();
+        foreach ($indice as $i) {
+            $actividad = new Actividad;
+            $actividad->Codigo_Producto_SIN = $codigo_producto_sin[$i];
+            $actividad->Codigo_Actividad_CAEB = $codigo_actividad_caeb[$i];
+            $actividad->Descripcion_o_producto_SIN = $descripcion_o_producto_sin[$i];
+            $actividad->save();
         }
-        return redirect()->action([ActividadController::class,'index']);
+
+        DB::commit();
+
+        return redirect()->action([ActividadController::class, 'index']);
+    } catch (\Exception $e) {
+        DB::rollback();
+        // Manejar el error
     }
+}
 
     /**
      * Display the specified resource.
