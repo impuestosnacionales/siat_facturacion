@@ -32,7 +32,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Dependencia::class);
     }
-
+    public function cliente(){
+        return $this->belongsTo(Cliente::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
