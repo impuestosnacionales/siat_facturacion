@@ -33,7 +33,7 @@ class FacturaController extends Controller
         $factura = DB::table('facturas')
         ->select('facturas.id','facturas.casos_esp','facturas.fecha','facturas.cod_auto',
         'sucursales.Nombre as sucursal','actividades.Descripcion_o_producto_SIN as actividad',
-        'tipo_documentos.Nombre as tipodoc','users.nombrers as razons')
+        'tipo_documentos.Nombre as tipodoc','users.razon_social as razons')
         ->leftJoin('sucursales', 'sucursales.id', '=', 'facturas.id_sucursal')
         ->leftJoin('actividades', 'actividades.id', '=', 'facturas.id_actividad')
         ->leftJoin('tipo_documentos', 'tipo_documentos.id', '=', 'facturas.id_tipodoc')
