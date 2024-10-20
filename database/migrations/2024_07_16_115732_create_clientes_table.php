@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
+            $table->string('razon_social'); // Asegúrate de que esta columna esté incluida
+            $table->string('nit'); // Asegúrate de que esta columna esté incluida
+            $table->string('complemento')->nullable(); // Agrega esta línea para incluir la columna complemento
             $table->timestamps();
             $table->string('email');
             $table->integer('celular');

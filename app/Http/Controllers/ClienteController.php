@@ -4,83 +4,89 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Tipo_documento;
-use Illuminate\Support\Facades\DB;
+use App\Models\User; // Asegúrate de importar el modelo User
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
     // Método para buscar clientes por NIT
     public function buscarPorNit(Request $request)
     {
-        $query = Cliente::query();
-        $query->select('clientes.id', 'clientes.razon_social', 'clientes.email', 'clientes.nit', 'clientes.celular',
-                       'clientes.telefono', 'clientes.complemento', 'tipo_documentos.Nombre as tipodoc')
-              ->leftJoin('tipo_documentos', 'tipo_documentos.id', '=', 'clientes.tipodoc_id');
+        // Inicializar las variables para evitar errores
+        $razonSocial = '';
+        $email = '';
+        $nit = '';
 
         // Verificar si se proporcionó un NIT para buscar
         if ($request->filled('nit')) {
-            $query->where('clientes.nit', 'LIKE', '%' . $request->input('nit') . '%');
+            // Buscar el usuario por NIT en la base de datos
+            $usuario = User::where('nit', $request->input('nit'))->first();
+
+            if ($usuario) {
+                // Asignar datos del usuario al formulario de creación
+                $razonSocial = $usuario->razon_social;
+                $email = $usuario->email;
+                $nit = $usuario->nit;
+            }
         }
 
-        $clientes = $query->get();
+        // Obtener tipos de documento
+        $tipodoc = Tipo_documento::all();
 
-        return view('Cliente.cliente', ['cliente' => $clientes]);
+        return view('Cliente.cliente', [
+            'razonSocial' => $razonSocial,
+            'email' => $email,
+            'nit' => $nit,
+            'tipodoc' => $tipodoc,
+            'usuario' => Auth::user()
+        ]);
     }
 
-    //INDEX
+    // Método para guardar un nuevo cliente
+    public function store(Request $request)
+    {
+        // Validación de datos
+        $validatedData = $request->validate([
+            'razon_social' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'celular' => 'required|numeric',
+            'telefono' => 'nullable|numeric',
+            'nit' => 'required|string|max:12|unique:clientes,nit',
+            'tipodoc_id' => 'required|exists:tipo_documentos,id',
+        ]);
+
+        // Crear y guardar el nuevo cliente
+        $cliente = new Cliente($validatedData);
+        $cliente->id_user = Auth::id(); // Asigna el ID del usuario autenticado
+
+        // Intentar guardar el cliente y manejar errores
+        try {
+            $cliente->save();
+            return redirect()->route('cliente')->with('success', 'Cliente guardado exitosamente.');
+        } catch (\Exception $e) {
+            \Log::error('Error al guardar el cliente: ' . $e->getMessage());
+            return redirect()->route('cliente')->with('error', 'Error al guardar el cliente.');
+        }
+    }
+
+    // Index: Mostrar todos los clientes
     public function index()
     {
-        $cliente= DB::table('clientes')
-        ->select('clientes.id','clientes.razon_social','clientes.email','clientes.nit','clientes.celular',
-        'clientes.telefono','clientes.complemento','tipo_documentos.Nombre as tipodoc')
-        ->leftJoin('tipo_documentos','tipo_documentos.id','=','clientes.tipodoc_id')
-        ->get();
-        return view('Cliente.cliente',['cliente'=>$cliente]);
-    }
-    //SHOW: nos permite ver la informacion de un dato en especifico de una tabla se requiere
-    public function show($id){
-        //findOrFail es un metodo propio de laravel que nos ayuda a encontrar la informacion
-        //especifica un dato en funcion a su id
-        $cliente = Cliente::findOrFail($id);
-        //retornar a una vista llamada ver donde nos muestra la informacion de ese dato
-        //la variable curso contiene
-        return view('Cliente.cliente_ver',['cliente' => $cliente]);
-    }
-    //CREATE
-    public function create(){
-        //
-        $tipodoc = Tipo_documento::all();
-        return view('Cliente.cliente_crear',['tipodoc' => $tipodoc]);
-    }
-    //STORE ayuda a crear nuevo curso en la bd
-    public function store(Request $request){
-        //
-        $cliente= new Cliente($request->all());
-        //dd($cliente);
-        $cliente->save();
-        return redirect()->action([ClienteController::class, 'index']);
+        $tipodoc = Tipo_documento::all(); // Obtener los tipos de documento
+        $usuario = Auth::user(); // Obtener el usuario autenticado
 
-    }
-    //EDIT
-    public function edit($id){
-        //
-        $cliente= Cliente::findOrFail($id);
-        $tipodoc= Tipo_documento::all();
-        return view('Cliente.cliente_editar',['cliente'=>$cliente],['tipodoc'=>$tipodoc]);
-    }
-    //UPDATE
-    public function update(Request $request, $id){
-        //
-        $cliente = Cliente::findOrFail($id);
-        $cliente->razon_social = $request ->razon_social;
-        $cliente->email = $request ->email;
-        $cliente->nit = $request ->nit;
-        $cliente->celular = $request ->celular;
-        $cliente->telefono = $request ->telefono;
-        $cliente->complemento = $request ->complemento;
-        $cliente->tipodoc_id = $request ->tipodoc_id;
-        $cliente->save();
-        return redirect()->action([ClienteController::class, 'index']);
+        // Inicializar variables para la vista
+        $razonSocial = '';
+        $email = '';
+        $nit = '';
 
+        return view('Cliente.cliente', [
+            'razonSocial' => $razonSocial,
+            'email' => $email,
+            'nit' => $nit,
+            'tipodoc' => $tipodoc,
+            'usuario' => $usuario // Pasar el usuario autenticado a la vista
+        ]);
     }
 }
