@@ -12,8 +12,6 @@ use App\Models\Tipo_documento;
 use App\Models\Detalle_factura;
 use App\Models\User;
 use App\Models\Unidad;
-use Illuminate\Support\Str; // Asegúrate de importar la clase Str
-
 
 class FacturaController extends Controller
 {
@@ -22,8 +20,7 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
-        $producto=Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
+        $producto = Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
                 ->select('productos.*', 'unidades.nombre as unidad_nombre')
                 ->get();
         $actividad = Actividad::all();
@@ -31,17 +28,17 @@ class FacturaController extends Controller
         $tipodoc = Tipo_documento::all();
         $user = User::all();
         $factura = DB::table('facturas')
-        ->select('facturas.id','facturas.casos_esp','facturas.fecha','facturas.cod_auto',
-        'sucursales.Nombre as sucursal','actividades.Descripcion_o_producto_SIN as actividad',
-        'tipo_documentos.Nombre as tipodoc','users.nombrers as razons')
-        ->leftJoin('sucursales', 'sucursales.id', '=', 'facturas.id_sucursal')
-        ->leftJoin('actividades', 'actividades.id', '=', 'facturas.id_actividad')
-        ->leftJoin('tipo_documentos', 'tipo_documentos.id', '=', 'facturas.id_tipodoc')
-        ->leftJoin('users', 'users.id', '=', 'facturas.id_user')
-        ->get();
-        //dd($empleado);
-        return view('Facturas.factura_tabla',[
-            'factura'=>$factura,
+            ->select('facturas.id', 'facturas.casos_esp', 'facturas.fecha', 'facturas.cod_auto',
+            'sucursales.Nombre as sucursal', 'actividades.Descripcion_o_producto_SIN as actividad',
+            'tipo_documentos.Nombre as tipodoc', 'users.nombrers as razons')
+            ->leftJoin('sucursales', 'sucursales.id', '=', 'facturas.id_sucursal')
+            ->leftJoin('actividades', 'actividades.id', '=', 'facturas.id_actividad')
+            ->leftJoin('tipo_documentos', 'tipo_documentos.id', '=', 'facturas.id_tipodoc')
+            ->leftJoin('users', 'users.id', '=', 'facturas.id_user')
+            ->get();
+
+        return view('Facturas.factura_tabla', [
+            'factura' => $factura,
             'actividad' => $actividad,
             'sucursal' => $sucursal,
             'tipodoc' => $tipodoc,
@@ -55,7 +52,7 @@ class FacturaController extends Controller
      */
     public function create()
     {
-        $producto=Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
+        $producto = Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
                 ->select('productos.*', 'unidades.nombre as unidad_nombre')
                 ->get();
         $actividad = Actividad::all();
@@ -76,40 +73,51 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validación de datos
+        $request->validate([
+            'id_producto.*' => 'required|integer',
+            'cantidad.*' => 'required|numeric|min:1',
+            'descuento.*' => 'nullable|numeric',
+            'desc_ad.*' => 'nullable|string',
+            'id_sucursal' => 'required|integer',
+            'id_actividad' => 'required|integer',
+            'id_tipodoc' => 'required|integer',
+            'id_user' => 'required|integer',
+            'fecha' => 'required|date',
+            'casos_esp' => 'required|string',
+        ]);
+
         DB::beginTransaction();
-        $factura=new Factura;
-        $factura->casos_esp=$request->get('casos_esp');
-        $factura->fecha=$request->get('fecha');
-        $factura->id_sucursal=$request->get('id_sucursal');
-        $factura->id_actividad=$request->get('id_actividad');
-        $factura->id_tipodoc=$request->get('id_tipodoc');
-        $factura->id_user=$request->get('id_user');
-        // Ahora podemos acceder al cod_auto generado automáticamente
-        $cod_auto_generado = $factura->cod_auto;
-        //dd($factura);
-        $factura->save();
-        
-        $id_producto=$request->get('id_producto');
+        try {
+            $factura = new Factura;
+            $factura->casos_esp = $request->get('casos_esp');
+            $factura->fecha = $request->get('fecha');
+            $factura->id_sucursal = $request->get('id_sucursal');
+            $factura->id_actividad = $request->get('id_actividad');
+            $factura->id_tipodoc = $request->get('id_tipodoc');
+            $factura->id_user = $request->get('id_user');
+            $factura->save();
+            
+            $id_producto = $request->get('id_producto');
+            $cantidad = $request->get('cantidad');
+            $descuento = $request->get('descuento');
+            $desc_ad = $request->get('desc_ad');
 
-        $cantidad=$request->get ('cantidad');
-        $descuento=$request->get('descuento');
-        $desc_ad=$request->get('desc_ad');
-
-        $cont=0;
-
-        while($cont<count($id_producto)){
-            $detalle=new Detalle_factura;
-            $detalle->id_factura=$factura->id;
-            $detalle->id_producto=$id_producto[$cont];
-            $detalle->cantidad=$cantidad[$cont];
-            $detalle->descuento=$descuento[$cont];
-            $detalle->desc_ad=$desc_ad[$cont];
-            $detalle->save();
-            $cont=$cont+1;
+            foreach ($id_producto as $index => $producto) {
+                $detalle = new Detalle_factura;
+                $detalle->id_factura = $factura->id;
+                $detalle->id_producto = $producto;
+                $detalle->cantidad = $cantidad[$index];
+                $detalle->descuento = $descuento[$index];
+                $detalle->desc_ad = $desc_ad[$index];
+                $detalle->save();
+            }
+            DB::commit();
+            return redirect()->action([FacturaController::class, 'index']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['error' => 'Error al guardar la factura: ' . $e->getMessage()]);
         }
-        DB::commit();
-        return redirect()->action([FacturaController::class,'index']);
     }
 
     /**
@@ -117,9 +125,7 @@ class FacturaController extends Controller
      */
     public function show(Factura $factura)
     {
-        /*//
-        $factura = Factura::findOrFail($id);
-        return view('Empleados.empleado_ver', ['empleado'=>$empleado]);*/
+        // Funcionalidad para mostrar la factura
     }
 
     /**
@@ -127,7 +133,7 @@ class FacturaController extends Controller
      */
     public function edit(Factura $factura)
     {
-        //
+        // Funcionalidad para editar la factura
     }
 
     /**
@@ -135,13 +141,14 @@ class FacturaController extends Controller
      */
     public function update(Request $request, Factura $factura)
     {
-        //
+        // Funcionalidad para actualizar la factura
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         $factura = Factura::findOrFail($id);
         $factura->delete();
         return redirect()->action([FacturaController::class, 'index']);

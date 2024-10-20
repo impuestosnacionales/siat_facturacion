@@ -81,30 +81,23 @@ class ActividadController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-        /**try{
-            $sql = DB::update(" update actividad set Codigo_Producto_SIN=?, Codigo_Actividad_CAEB=?, Descripcion_o_producto_SIN=?", [
-                $request->txtCodigo_Producto_SIN,
-                $request->txtCodigo_Actividad_CAEB,
-                $request->txtDescripcion_o_producto_SIN,
-            ]);
-        }catch(\Throwable $th){
-            $sql=0;
-        }
-        if($sql==true){
-            return back()->with("correcto", "Producto modificado correctamente");
-        }else{
-            return back()->with("incorrecto", "Error al modificar");
-        }**/
-        $actividad=Actividad::FindOrFail($id);
-        $actividad->Codigo_Producto_SIN=$request->Codigo_Producto_SIN;
-        $actividad->Codigo_Actividad_CAEB=$request->Codigo_Actividad_CAEB;
-        $actividad->Descripcion_o_producto_SIN=$request->Descripcion_o_producto_SIN;
-        $actividad->save();
-        return back()->with("correcto", "Producto modificado correctamente");
-    }
+    public function update(Request $request, $id)
+{
+    // Validar los datos
+    $request->validate([
+        'Codigo_Producto_SIN' => 'required|integer',
+        'Codigo_Actividad_CAEB' => 'required|integer',
+        'Descripcion_o_producto_SIN' => 'required|string|max:255',
+    ]);
+
+    // Encontrar la actividad por ID y actualizarla
+    $actividad = Actividad::findOrFail($id);
+    $actividad->update($request->all());
+
+    // Redirigir o retornar respuesta
+    return redirect()->route('actividad.index')->with('success', 'Actividad actualizada con éxito.');
+}
+
 
     /**
      * Remove the specified resource from storage.

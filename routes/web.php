@@ -102,10 +102,8 @@ Route::delete('/documentos/{id}', [DocumentoSectorController::class, 'destroy'])
 Route::put('/documentos/{id}', [DocumentoSectorController::class, 'update'])->name('documentos.update');
 Route::get('/documentos/crear',[DocumentoSectorController::class,'create'])->name('documentos.create');
 
-Route::get('/actividad', [ActividadController::class, 'index'])->name('actividad');
-Route::post('/actividad', [ActividadController::class, 'store'])->name('actividad.store');
-Route::delete('/actividad/{id}', [ActividadController::class, 'destroy'])->name('actividad.destroy');
-Route::put('/actividad/{id}', [ActividadController::class, 'update'])->name('actividad.update');
+Route::resource('actividad', ActividadController::class);
+
 
 Route::get('/unidad', [UnidadController::class, 'index'])->name('unidad');
 Route::post('/unidad', [UnidadController::class, 'store'])->name('unidad.store');
@@ -123,6 +121,7 @@ Route::put('/cliente/{id}', [ClienteController::class, 'update'])->name('cliente
 Route::get('/tipodoc', [TipoDocumentoController::class, 'index'])->name('tipodoc');
 Route::post('/tipodoc', [TipoDocumentoController::class, 'store'])->name('tipodoc.store');
 Route::delete('/tipodoc/{id}', [TipoDocumentoController::class, 'destroy'])->name('tipodoc.destroy');
+Route::get('/tipodoc/{id}/ver', [TipoDocumentoController::class, 'show'])->name('tipodoc.show');
 Route::put('/tipodoc/{id}', [TipoDocumentoController::class, 'update'])->name('tipodoc.update');
 
 Route::get('/impresion', [ImpresionController::class, 'index'])->name('impresion');
@@ -135,7 +134,7 @@ Route::post('/dependencia', [DependenciaController::class, 'store'])->name('depe
 Route::delete('/dependencia/{id}', [DependenciaController::class, 'destroy'])->name('dependencia.destroy');
 Route::put('/dependencia/{id}', [DependenciaController::class, 'update'])->name('dependencia.update');
 
-Route::get('/producto', [ProductoController::class, 'index'])->name('producto');
+Route::get('/producto', [ProductoController::class, 'index'])->name('producto.index');
 Route::post('/producto', [ProductoController::class, 'store'])->name('producto.store');
 Route::delete('/producto/{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
 Route::put('/producto/{id}', [ProductoController::class, 'update'])->name('producto.update');
