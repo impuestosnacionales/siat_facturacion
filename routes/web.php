@@ -62,6 +62,11 @@ Route::group(['middleware' => ['role:Administrador']],function () {
     Route::post('/dependencia', [DependenciaController::class, 'store'])->name('dependencia.store');
     Route::delete('/dependencia/{id}', [DependenciaController::class, 'destroy'])->name('dependencia.destroy');
     Route::put('/dependencia/{id}', [DependenciaController::class, 'update'])->name('dependencia.update');
+
+    Route::get('/asignar',[AsignarController::class,'index'])->name('asignar');
+    Route::get('/asignar_{id}_editar',[AsignarController::class,'edit'])->name('asignar.edit');
+    Route::put('/asignar_{id}',[AsignarController::class,'update'])->name('asignar.update');
+
     
 });
 
@@ -87,10 +92,7 @@ Route::middleware('auth')->group(function () {
     /*RUTA UPTADE PARA ACTUALIZAR LO EDITADO */
     Route::put('/rol/{id}',[RoleController::class,'update'])->name('rol.update');
 
-    Route::get('/asignar',[AsignarController::class,'index'])->name('asignar');
-    Route::get('/asignar_{id}_editar',[AsignarController::class,'edit'])->name('asignar.edit');
-    Route::put('/asignar_{id}',[AsignarController::class,'update'])->name('asignar.update');
-
+    
     Route::get('/dashboard', function () {
         return view('home');
     })->middleware('auth', 'verified')->name('home');

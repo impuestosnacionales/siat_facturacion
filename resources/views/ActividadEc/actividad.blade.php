@@ -6,7 +6,106 @@
 
 @section('content')
 <br>
-<a href="" class="btn btn-success" role="button" data-bs-toggle="modal" data-bs-target="#ModalCrear">Añadir <i class="fa-regular fa-square-plus"></i></a>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control, .form-select {
+        height: 40px;
+        border: 1px solid #ced4da; /* Borde claro */
+        border-radius: 4px; /* Bordes redondeados */
+    }
+
+    h5.fw-bold {
+        margin-bottom: 20px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+
+    .row {
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        border: none;
+        border-radius: 4px; /* Bordes redondeados */
+        padding: 5px 10px; /* Padding para más tamaño */
+        font-size: 14px; /* Tamaño de fuente */
+        transition: background-color 0.3s, transform 0.2s; /* Efecto al pasar */
+    }
+
+    .btn-add {
+        background-color: #28a745; /* Verde */
+        color: white;
+        margin: 0 5px;
+    }
+
+    .btn-add:hover {
+        background-color: #218838; /* Verde oscuro al pasar */
+        transform: scale(1.05); /* Efecto de aumento */
+    }
+
+    .btn-icon {
+        background-color: #007bff; /* Azul */
+        color: white;
+    }
+
+    .btn-icon:hover {
+        background-color: #0056b3; /* Azul oscuro al pasar */
+        transform: scale(1.05);
+    }
+
+    .modal-header {
+        background-color: #007bff;
+        color: white;
+        border-bottom: 2px solid #0056b3; /* Borde inferior */
+    }
+
+    .modal-title {
+        font-weight: bold;
+    }
+
+    .modal-content {
+        border-radius: 8px; /* Bordes redondeados del modal */
+        border: 1px solid #007bff; /* Borde del modal */
+    }
+
+    .modal-footer {
+        border-top: 1px solid #e9ecef;
+    }
+
+    .modal-body {
+        padding: 20px;
+        background-color: #f8f9fa; /* Fondo más claro */
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        z-index: 999;
+        display: none;
+    }
+
+    .spinner-border {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+<a data-bs-toggle="modal" data-bs-target="#ModalCrear" class="btn btn-add" role="button">Añadir <i class="fa-regular fa-square-plus"></i></a>
+<br>
+<br>
 
 <!-- Modal para Crear -->
 <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -33,10 +132,7 @@
                         <label class="form-label">Descripcion_o_producto_SIN</label>
                         <input type="text" class="form-control" name="Descripcion_o_producto_SIN" id="p_descripcion">
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3">
-                        <br>
-                        <button type="button" id="bt_agregar" class="btn btn-primary">Agregar</button>
-                    </div>
+              
                     <div class="card">
                         <div class="card-body table-responsive">
                             <div class="row">
@@ -58,16 +154,19 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary form-control">Añadir</button>
+          
+                
+      
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-12 col-md-12 justify-content-center">
-    <table class="table table-striped table-bordered table-hover">
-        <thead class="bg-primary text-white">
+
+<h5 class="fw-bold">Listado de Actividades econonomicas</h5>
+    <table class="table">
+        <thead class= >
             <tr>
                 <br>
                 <th>Codigo_Producto_SIN</th>
@@ -83,17 +182,15 @@
                 <td>{{$actividad->Codigo_Actividad_CAEB}}</td>
                 <td>{{$actividad->Descripcion_o_producto_SIN}}</td>
                 <td>
-                    <form action="{{route('actividad.destroy', $actividad->id)}}" method="POST" style="display:inline;">
+                <form action="{{ route('actividad.destroy', $actividad->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta actividad economica?');">
                         @csrf
-                        {{method_field('DELETE')}}
-                        <button class="btn border-0" type="submit" value="Eliminar" onclick="return EliminarActividad('Eliminar Actividad')"><i class="fa-solid fa-trash"></i></button>
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-icon" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta unidad?');">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     </form>
-                    <button type="button" class="btn border-0" data-bs-toggle="modal" data-bs-target="#ModalEditar{{$actividad->id}}">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button type="button" class="btn border-0" data-bs-toggle="modal" data-bs-target="#ModalMostrar{{$actividad->id}}">
-                        <i class="fa-solid fa-eye"></i>
-                    </button>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#ModalEditar{{ $actividad->id }}" class="btn btn-icon"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a data-bs-toggle="modal" data-bs-target="#ModalMostrar{{ $actividad->id }}" class="btn btn-icon"><i class="fa-solid fa-eye"></i></a>
                 </td>
             </tr>
 
@@ -122,6 +219,7 @@
                                     <input type="text" class="form-control" id="descripcion_producto_editar" name="Descripcion_o_producto_SIN" value="{{ $actividad->Descripcion_o_producto_SIN }}">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                
                             </form>
                         </div>
                     </div>
