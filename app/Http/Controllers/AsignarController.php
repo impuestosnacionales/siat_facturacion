@@ -12,7 +12,9 @@ class AsignarController extends Controller
     public function index(){
         //
         $user = User::all();
-        return view('userpermi',['users'=> $user]);
+        $roles = Role::all();
+
+        return view('userpermi',['users'=> $user],['role'=>$roles]);
     }
     public function edit(string $id){
         //

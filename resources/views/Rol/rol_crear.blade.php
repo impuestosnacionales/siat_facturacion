@@ -15,7 +15,7 @@
       </div>
       <input type="submit" value="Crear">
     </form>
-      <a href="{{ route('rol') }}">Volver a la lista de Roles</a>
+    <a href="{{ route('rol') }}" class="btn btn-outline-primary">Volver a la lista de Roles</a>
 
   </div>
 @endsection
