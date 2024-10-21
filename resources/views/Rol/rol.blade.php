@@ -3,6 +3,8 @@
     Lista de Roles
 @endsection
 @section('content')
+  <a href="{{ route('rol.create') }}" class="btn btn-outline-warning">Nuevo Rol</a>
+
 <table id="tab" class="table table-bordered table-striped">
   <thead>
     <tr>
