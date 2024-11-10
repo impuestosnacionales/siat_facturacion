@@ -74,9 +74,12 @@
                 @else
                     <a href="{{ route('login') }}" class="btn btn-outline-light">Iniciar Sesión<i class="bx bx-chevron-right"></i></a>
                 @endauth
+                <a href="https://youtu.be/cyqO8b2A-4Q?si=Ez1SnbP-UQxpGUb8" target="_blank" class="btn-youtube">Ver Video</a>
             </div>
       @endif
     </div>
+    <a href="https://youtu.be/cyqO8b2A-4Q?si=Ez1SnbP-UQxpGUb8" target="_blank" class="btn-youtube">Ver Video</a>
+    aaa
   </section><!-- End Hero -->
 
   <main id="main">

@@ -34,6 +34,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  
 </head>
 
 <body>
@@ -72,10 +73,12 @@
                 @auth
                     <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline-light">Iniciar Sesión<i class="bx bx-chevron-right"></i></a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-light">Iniciar Sesión<i class="bx bx-chevron-right"></i></a><br>
                 @endauth
             </div>
       @endif
+      <a href="https://youtu.be/cyqO8b2A-4Q?si=Ez1SnbP-UQxpGUb8" target="_blank" class="btn btn-outline-light">Ver Video</a>
+
     </div>
   </section><!-- End Hero -->
 

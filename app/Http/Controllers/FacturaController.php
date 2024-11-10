@@ -12,6 +12,7 @@ use App\Models\Tipo_documento;
 use App\Models\Detalle_factura;
 use App\Models\User;
 use App\Models\Unidad;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str; // Asegúrate de importar la clase Str
 
 
@@ -22,7 +23,13 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
+        $usuario = Auth::user(); // Obtener el usuario autenticado
+
+        // Inicializar variables para la vista
+        $razonSocial = '';
+        $email = '';
+        $nit = '';
+
         $producto=Producto::join('unidades', 'productos.unidad_id', '=', 'unidades.id')
                 ->select('productos.*', 'unidades.nombre as unidad_nombre')
                 ->get();
@@ -41,6 +48,11 @@ class FacturaController extends Controller
         ->get();
         //dd($empleado);
         return view('Facturas.factura_tabla',[
+
+            'usuario' => $usuario, // Pasar el usuario autenticado a la vista
+            'razonSocial' => $razonSocial,
+            'email' => $email,
+            'nit' => $nit,
             'factura'=>$factura,
             'actividad' => $actividad,
             'sucursal' => $sucursal,

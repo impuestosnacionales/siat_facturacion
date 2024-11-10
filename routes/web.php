@@ -23,6 +23,11 @@ use App\Http\Controllers\AsignarController;
 use Spatie\Permission\Models\Role;
 
 
+Route::get('/asignar',[AsignarController::class,'index'])->name('asignar');
+Route::get('/asignar_{id}_editar',[AsignarController::class,'edit'])->name('asignar.edit');
+Route::put('/asignar_{id}',[AsignarController::class,'update'])->name('asignar.update');
+
+
 // PAL ADMIN
 Route::group(['middleware' => ['role:Administrador']],function () {
 
@@ -62,11 +67,6 @@ Route::group(['middleware' => ['role:Administrador']],function () {
     Route::post('/dependencia', [DependenciaController::class, 'store'])->name('dependencia.store');
     Route::delete('/dependencia/{id}', [DependenciaController::class, 'destroy'])->name('dependencia.destroy');
     Route::put('/dependencia/{id}', [DependenciaController::class, 'update'])->name('dependencia.update');
-
-    Route::get('/asignar',[AsignarController::class,'index'])->name('asignar');
-    Route::get('/asignar_{id}_editar',[AsignarController::class,'edit'])->name('asignar.edit');
-    Route::put('/asignar_{id}',[AsignarController::class,'update'])->name('asignar.update');
-
     
 });
 

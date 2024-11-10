@@ -112,7 +112,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <font align="center"><h1 class="modal-title fs-5" id="exampleModalLabel">Agregar productos o servicios</h1></font>
+                <font align="center">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar productos o servicios</h1>
+                </font>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -120,6 +122,7 @@
                 <form action="{{route('actividad.store')}}" method="POST" onsubmit="showLoader(); setTimeout(hideLoader, 7000); showMessage();">
                     @csrf
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    
                     <div class="mb-3">
                         <label class="form-label">Codigo_Producto_SIN</label>
                         <input type="number" class="form-control" name="Codigo_Producto_SIN" id="p_codigo">
@@ -132,12 +135,15 @@
                         <label class="form-label">Descripcion_o_producto_SIN</label>
                         <input type="text" class="form-control" name="Descripcion_o_producto_SIN" id="p_descripcion">
                     </div>
-              
+                    
                     <div class="card">
                         <div class="card-body table-responsive">
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div>
-                                    <br>
+                                    <button type="button" class="btn btn-primary btn-lg" id="bt_agregar">
+                                        <i class="fas fa-shopping-cart"></i> Agregar
+                                    </button>
+                                    <br><br>
                                     <table class="coso table-sm">
                                         <thead class="table-primary table-bordered border-primary">
                                             <tr>
@@ -154,9 +160,10 @@
                             </div>
                         </div>
                     </div>
-          
-                
-      
+                    
+                    <div class="col-auto">
+                        <input class="btn btn-primary form-control" type="submit" value="Añadir">
+                    </div>
                 </form>
             </div>
         </div>
@@ -188,6 +195,7 @@
                         <button class="btn btn-icon" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta unidad?');">
                             <i class="fa-solid fa-trash"></i>
                         </button>
+                        
                     </form>
                     <a href="" data-bs-toggle="modal" data-bs-target="#ModalEditar{{ $actividad->id }}" class="btn btn-icon"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a data-bs-toggle="modal" data-bs-target="#ModalMostrar{{ $actividad->id }}" class="btn btn-icon"><i class="fa-solid fa-eye"></i></a>
